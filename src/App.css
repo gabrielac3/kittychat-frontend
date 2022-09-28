@@ -1,0 +1,10 @@
+.app{
+  height: 100vh;
+  display:flex;
+}
+
+.mountain{
+  background-image: url('../public/image/mountain.jpg');
+  background-size: 50vw 100vh;
+  background-repeat: no-repeat;
+}
