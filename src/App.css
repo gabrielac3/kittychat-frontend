@@ -1,4 +1,5 @@
 .app {
+  font-family: "Roboto", sans-serif;
   display: inline-block;
   height: 100%;
   width: 100%;
@@ -77,6 +78,22 @@
   margin-bottom: 15px;
   color: #fff;
   font-family: "Roboto", sans-serif;
+}
+
+/* ------ Home.js ------- */
+.home {
+  background: #433574;
+  color: white;
+}
+
+.profile p {
+  font-weight: 500;
+}
+
+/* ----1.2. seccion main----- */
+.chat-message img {
+  width: 15px;
+  height: 15px;
 }
 
 @media (max-width: 768px) {
