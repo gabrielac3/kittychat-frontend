@@ -5,14 +5,14 @@ export const Welcome = () => {
   return (
     <div className='welcome-main'>
       <div className='mountain'>
-        <img src='../image/mountain.jpg' alt='background'/>
+        <img src='../image/mountain.jpg' alt='background' />
       </div>
       <div className='halfPurple'>
         <div className='logo-container'>
-          <img src='../image/logoCat.png' alt='logo-cat'/>
+          <img src='../image/logoCat.png' class="img-logo" alt='logo-cat' />
         </div>
         <Login></Login>
-      </div>   
+      </div>
     </div>
   )
 }
