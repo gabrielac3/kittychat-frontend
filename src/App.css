@@ -1,10 +1,42 @@
 .app{
-  height: 100vh;
-  display:flex;
+  display: inline-block;
+  height: 100%;
+  width: 100%;
 }
 
-.mountain{
-  background-image: url('../public/image/mountain.jpg');
-  background-size: 50vw 100vh;
-  background-repeat: no-repeat;
+.welcome-main {
+  display: flex;
+  height: 100%;
 }
+
+.mountain {
+  width: 40%;
+}
+
+.halfPurple {
+  background: #A585AC;
+  display: grid;
+  grid-template-rows: 16% 80%;
+  padding: 2% 0;
+  width: 60%;
+}
+
+.mountain img {
+  object-position: top;
+  max-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.logo-container{
+  height: 20%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.login {
+  background: white;
+  padding: 1rem 2rem;
+}
+ 
