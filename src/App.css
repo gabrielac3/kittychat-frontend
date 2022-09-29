@@ -1,4 +1,4 @@
-.app{
+.app {
   display: inline-block;
   height: 100%;
   width: 100%;
@@ -14,13 +14,27 @@
 }
 
 .halfPurple {
-  background: #A585AC;
+  background: #a585ac;
   display: grid;
-  grid-template-rows: 16% 80%;
+  grid-template-rows: 30% 70%;
   padding: 2% 0;
   width: 60%;
 }
-
+.form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+}
+.form p {
+  margin: 0;
+}
+.form h1 {
+  margin: 2px 0 13px 0;
+}
+.img-logo {
+  width: 150px;
+  height: 140px;
+}
 .mountain img {
   object-position: top;
   max-height: 100%;
@@ -29,14 +43,55 @@
   object-fit: cover;
 }
 
-.logo-container{
+.logo-container {
   height: 20%;
   max-width: 100%;
   max-height: 100%;
+  margin: auto;
 }
 
 .login {
   background: white;
-  padding: 1rem 2rem;
+  padding: 10px 30px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
 }
- 
+
+.form input {
+  margin: 8px 0 8px 0;
+  border-radius: 5px;
+  border-color: #3e2b6b;
+  padding: 8px;
+}
+.form button {
+  background-color: #433574;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
+@media (max-width: 768px) {
+  .halfPurple {
+    grid-template-rows: 33% 45%;
+    width: 100vw;
+    height: 100vh;
+  }
+  .welcome-main {
+    display: block;
+  }
+  .mountain {
+    display: none;
+  }
+  .img-logo {
+    width: 180px;
+    height: 170px;
+  }
+  .login {
+    margin: 0 20px;
+  }
+}
