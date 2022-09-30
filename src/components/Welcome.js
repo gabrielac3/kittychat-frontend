@@ -1,5 +1,7 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { Login } from './Login'
+import { Register } from './Register'
 
 export const Welcome = () => {
   return (
@@ -11,7 +13,11 @@ export const Welcome = () => {
         <div className='logo-container'>
           <img src='../image/logoCat.png' class="img-logo" alt='logo-cat' />
         </div>
-        <Login></Login>
+        <Routes>
+          <Route path='/' element = {<Login />}></Route>
+          <Route path='/login' element = {<Login />}></Route>
+          <Route path='/register' element = {<Register />}></Route>
+        </Routes>
       </div>
     </div>
   )
