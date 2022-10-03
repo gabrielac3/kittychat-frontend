@@ -3,30 +3,30 @@ import React from 'react'
 export const Home = () => {
   return (
     <div className='home'>
-        <section>
-          <div>
+        <section className='profile-aside'>
+          <div className='profile-logo'>
             <img src='../image/logo-home.png' alt='logo home'/>
           </div>
           <div className='profile'>
             <div>
-              <img alt='profile-img'/>
+              <img src='../image/user-img.png' alt='profile-img'/>
             </div>
             <p>Daphnne Reyes</p>
           </div>
           <button>Crear canal</button>
-          <div className='channels-title'>
-            <i class="fa-solid fa-cat"></i>
-            <h2>Channels</h2>
-          </div>
-          <div className='channels'>
-            <ul>
+          <div className='channels-info'>
+            <div className='channels-title'>
+              <i class="fa-solid fa-cat"></i>
+              <h2>Channels</h2>
+            </div>
+            <ul className='channels'>
               <li>Fans de JC</li>
               <li>ChatApp</li>
             </ul>
           </div>
         </section>
 
-        <section>
+        <section className='main'>
           <div className='chat-navbar'>
             <div>
               <h3>ChatApp</h3>
@@ -37,16 +37,38 @@ export const Home = () => {
             </div>
           </div>
 
-          <div className='chat-main'></div>
+          <div className='chat-main'>
+            <p>mensaje prueba 1</p>
+            <p>mensaje prueba 1</p>
+            <p>mensaje prueba 1</p>
+          </div>
 
           <div className='chat-message'>
-            <input type='text'/>
-            <img src='../image/send.png' alt='send icon'/>
+            <input type='text' placeholder='Type your message'/>
+            <i class="fa-solid fa-paper-plane"></i>
+            {/* <img src='../image/send.png' alt='send icon'/> */}
           </div>
         </section>
 
-        <section>
-          {/* toggle */}
+        <section className='users-aside'>
+          <div className='users-title'>
+            <i class="fa-solid fa-users"></i>
+            <h3>Users</h3>
+          </div>
+          <div className='users-cards'>
+            <div className='user'>
+              <h4>Paola Gamarra</h4>
+              <p>Online</p>
+            </div>
+            <div className='user'>
+              <h4>Gaby cordoba</h4>
+              <p>Online</p>
+            </div>
+            <div className='user'>
+              <h4>Daniela fuentes</h4>
+              <p>Online</p>
+            </div>
+          </div>
         </section>
     </div>
   )
