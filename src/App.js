@@ -4,7 +4,7 @@ import {Routes, Route } from "react-router-dom";
 import { Home } from './components/Home';
 import io from 'socket.io-client';
 
-const socket = io();
+const socket = io("http://localhost:3300/");
 function App() {
   return (
       <div className='app'>
