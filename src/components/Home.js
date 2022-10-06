@@ -43,11 +43,13 @@ export const Home = () => {
             <p>mensaje prueba 1</p>
           </div>
 
-          <div className='chat-message'>
+          <form className='chat-message'>
             <input type='text' placeholder='Type your message'/>
-            <i class="fa-solid fa-paper-plane"></i>
+            <button>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
             {/* <img src='../image/send.png' alt='send icon'/> */}
-          </div>
+          </form>
         </section>
 
         <section className='users-aside'>
