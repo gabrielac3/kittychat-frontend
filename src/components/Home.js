@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { ChatBody } from './ChatBody'
+import { ChatFooter } from './ChatFooter'
 
-export const Home = () => {
+export const Home = ({ socket }) => {
+  const [messages, setMessages] = useState([])
+  useEffect(()=> {
+    socket.on("messageResponse", data => setMessages([...messages, data]))
+  }, [socket, messages])
+/* -----------TESTING SOCKETS---------- */
+
   return (
     <div className='home'>
         <section className='profile-aside'>
@@ -16,7 +24,7 @@ export const Home = () => {
           <button>Crear canal</button>
           <div className='channels-info'>
             <div className='channels-title'>
-              <i class="fa-solid fa-cat"></i>
+              <i className="fa-solid fa-cat"></i>
               <h2>Channels</h2>
             </div>
             <ul className='channels'>
@@ -33,28 +41,18 @@ export const Home = () => {
               <p>Grupo para desarrollar...</p>
             </div>
             <div>
-              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <i className="fa-solid fa-ellipsis-vertical"></i>
             </div>
           </div>
 
-          <div className='chat-main'>
-            <p>mensaje prueba 1</p>
-            <p>mensaje prueba 1</p>
-            <p>mensaje prueba 1</p>
-          </div>
+          <ChatBody messages={messages} />
 
-          <form className='chat-message'>
-            <input type='text' placeholder='Type your message'/>
-            <button>
-              <i class="fa-solid fa-paper-plane"></i>
-            </button>
-            {/* <img src='../image/send.png' alt='send icon'/> */}
-          </form>
+          <ChatFooter socket={socket} />
         </section>
 
         <section className='users-aside'>
           <div className='users-title'>
-            <i class="fa-solid fa-users"></i>
+            <i className="fa-solid fa-users"></i>
             <h3>Users</h3>
           </div>
           <div className='users-cards'>

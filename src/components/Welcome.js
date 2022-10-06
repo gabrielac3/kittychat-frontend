@@ -11,7 +11,7 @@ export const Welcome = () => {
       </div>
       <div className='halfPurple'>
         <div className='logo-container'>
-          <img src='../image/logoCat.png' class="img-logo" alt='logo-cat' />
+          <img src='../image/logoCat.png' className="img-logo" alt='logo-cat' />
         </div>
         <Routes>
           <Route path='/' element = {<Login />}></Route>
