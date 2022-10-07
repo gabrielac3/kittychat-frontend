@@ -5,7 +5,7 @@ import { ChatFooter } from './ChatFooter'
 export const Home = ({ socket }) => {
   const [messages, setMessages] = useState([])
   useEffect(()=> {
-    socket.on("messageResponse", data => setMessages([...messages, data]))
+    socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
   }, [socket, messages])
 /* -----------TESTING SOCKETS---------- */
 
