@@ -17,16 +17,21 @@ export const Register= () => {
   )
 
   function handleChange(event) {
-      setFormData(prevFormData => {
-          return {
-              ...prevFormData,
-              [event.target.name]: event.target.value
-          }
-      })
+    setFormData(prevFormData => {
+        return {
+            ...prevFormData,
+            [event.target.name]: event.target.value
+        }
+    })
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    sessionStorage.setItem('userName', formData.username)
   }
 
   return (
-    <div className='register'>
+    <form className='register' onSubmit={handleSubmit}>
         <div className='form'>
             <p>Welcome</p>
             <h1>Register your account</h1>
@@ -53,11 +58,11 @@ export const Register= () => {
               value={formData.password}
               onChange={handleChange}
             ></input>
-            <button onClick={logFetch} >Sign Up</button>
+            <button type='submit' >Sign Up</button>
         </div>
         <p>Already have an account?
           <Link to="/login">Sign in</Link>
         </p>
-    </div>   
+    </form>   
   )
 }

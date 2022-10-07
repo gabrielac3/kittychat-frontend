@@ -5,14 +5,15 @@ export const ChatFooter = ({ socket }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    socket.emit('chat message', {
-      text: message,
-      name: 'user tester',
-      id: `${socket.id}${Math.random()}`,
-      socketID: socket.id,
-    });
+    if(message.trim() && sessionStorage.getItem('userName')) {
+      socket.emit('chat message', {
+        text: message,
+        name: sessionStorage.getItem('userName'),
+        id: `${socket.id}${Math.random()}`,
+        socketID: socket.id,
+      });
+    }
     setMessage('');
-    console.log('handling send msm');
   }
 
   return (
