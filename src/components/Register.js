@@ -2,13 +2,23 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 export const Register= () => {
-  const logFetch = () => {
+/*   const logFetch = () => {
     fetch('https://enigmatic-inlet-02267.herokuapp.com/addUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(formData)
+    }).then(res => res.json()).then(data => console.log(data))
+  } */
+
+  const logFetch = () => {
+    fetch('http://localhost:3100/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ holaLogin: 'HolaLogin'})
     }).then(res => res.json()).then(data => console.log(data))
   }
 
@@ -17,16 +27,23 @@ export const Register= () => {
   )
 
   function handleChange(event) {
-      setFormData(prevFormData => {
-          return {
-              ...prevFormData,
-              [event.target.name]: event.target.value
-          }
-      })
+    setFormData(prevFormData => {
+        return {
+            ...prevFormData,
+            [event.target.name]: event.target.value
+        }
+    })
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    sessionStorage.setItem('userName', formData.username)
+    
   }
 
   return (
-    <div className='register'>
+    <div>
+    <form className='register' onSubmit={handleSubmit}>
         <div className='form'>
             <p>Welcome</p>
             <h1>Register your account</h1>
@@ -53,11 +70,13 @@ export const Register= () => {
               value={formData.password}
               onChange={handleChange}
             ></input>
-            <button onClick={logFetch} >Sign Up</button>
+            <button type='submit' >Sign Up</button>
         </div>
         <p>Already have an account?
           <Link to="/login">Sign in</Link>
         </p>
-    </div>   
+    </form>  
+    <button onClick={logFetch}>SToken</button> 
+    </div>
   )
 }
