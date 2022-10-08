@@ -2,19 +2,60 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 export const Login = () => {
+
+  const logFetch = () => {
+    return fetch('http://localhost:3100/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ holaLogin: 'HolaLogin'})
+    }).then(res => res.json()).then(data => data)
+  }
+
+  const [formData, setFormData] = React.useState(
+    {email: "", password: ""}
+  )
+
+  function handleChange(event) {
+    setFormData(prevFormData => {
+        return {
+            ...prevFormData,
+            [event.target.name]: event.target.value
+        }
+    })
+  }
+
+  async function handleSubmit (e) {
+    e.preventDefault();
+    const token = await logFetch();
+    console.log(token);
+    sessionStorage.setItem ('userinfo', JSON.stringify({ 'email':formData.email, 'token': token }));
+  }
+
   return (
     <div className='login'>
-      <div className='form'>
+      <form className='form' onSubmit={handleSubmit}>
         <p>Welcome Back</p>
         <h1>Login to your account</h1>
         <label>Email</label>
-        <input type='email'></input>
+        <input 
+          type='email'
+          name='email'
+          value={formData.email}
+          onChange={handleChange}
+          ></input>
         <label>Password</label>
-        <input type='password'></input>
-        <button>Login now</button>
-      </div>
+        <input 
+          type='password'
+          name='password'
+          value={formData.password}
+          onChange={handleChange}
+          ></input>
+        <button type='submit'>Login now</button>
+      </form>
       <p>Dont have an account?
-        <Link to="/register">Join today</Link>
+        <Link to='/register'>Join today</Link>
       </p>
 
     </div>
