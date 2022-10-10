@@ -5,11 +5,6 @@ import { Register } from './Register'
 
 export const Welcome = () => {
   const [errorMsg, setErrorMsg] = React.useState('')
-/*   handleChange = (event) => {
-    this. setState({
-        chosen: event. target. value
-   })
- */
   return (
     <div className='welcome-main'>
       <div className='mountain'>
