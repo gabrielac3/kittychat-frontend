@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 export const Register= () => {
-  const [errorMessage, setErrorMessage] = React.useState('default')
-  const [errorMsg, setErrorMsg] = React.useState('')
-  const logFetch = () => {
-    fetch('http://localhost:3100/addUser', {
+  // const [errorMessage, setErrorMessage] = React.useState('default')
+  const [resMsg, setErrorMsg] = React.useState('')
+  let msgError
+
+  const addUser = () => {
+    return fetch('http://localhost:3100/addUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -13,18 +15,10 @@ export const Register= () => {
       body: JSON.stringify(formData)
     })
     .then(res => {
-      if(!res.ok) {
-        return res.text().then(text => { throw text })
-       }
-      else {
-       return res.json();
-      }
+      if(!res.ok) return res.json()
+      else return res.text();
     })
-    .catch(error => {
-      const errorMsg = JSON.parse(error).error
-      const equalPos = errorMsg.indexOf('=') 
-      setErrorMessage(errorMsg.slice(0, equalPos)) 
-    })
+    .catch(error => console.log(error))
   }
 
   const [formData, setFormData] = React.useState(
@@ -40,28 +34,29 @@ export const Register= () => {
     })
   }
 
-  function handleSubmit (e) {
+  async function handleSubmit (e) {
     e.preventDefault();
-    logFetch();
-    showError()
-    console.log(showError())
+    const res = await addUser();
+    showError(res)
   }
 
-  function showError() {
-    if(errorMessage == 'Key (user_name)'){
-      console.log('q pasa');
+  const showError = (res) => {
+    const resMsg = res.message
+    const indexOfEqual = resMsg.indexOf('=') 
+    if(!indexOfEqual) return
+    const msgError = resMsg.slice(0, indexOfEqual)
+    if(msgError === 'Key (user_name)'){
       setErrorMsg('Username already in use')
-    } else if (errorMessage == 'Key (email)'){
-      setErrorMsg('Email already in user')
-    } else console.log('dime ahora');
+    } else if (msgError === 'Key (email)'){
+      setErrorMsg('Email already in use')
+    } else setErrorMsg('else')
   }
 
   return (
     <form className='register' onSubmit={handleSubmit}>
         <div className='form'>
             <p>Welcome</p>
-            <p>{errorMessage}</p>
-            <p>{errorMsg}</p>
+            <p>{resMsg}</p>
             <h1>Register your account</h1>
             <label>User</label>
             <input

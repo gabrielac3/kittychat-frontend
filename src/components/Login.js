@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 
 export const Login = () => {
 
-  const logFetch = () => {
+  const getToken = () => {
     return fetch('http://localhost:3100/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ holaLogin: 'HolaLogin'})
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password
+      })
     }).then(res => res.json()).then(data => data)
   }
 
@@ -28,8 +31,7 @@ export const Login = () => {
 
   async function handleSubmit (e) {
     e.preventDefault();
-    const token = await logFetch();
-    console.log(token);
+    const token = await getToken();
     sessionStorage.setItem ('userinfo', JSON.stringify({ 'email':formData.email, 'token': token }));
   }
 
