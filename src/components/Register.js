@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Register= (props) => {
   // const [resMsg, setErrorMsg] = React.useState('')
@@ -36,6 +36,8 @@ export const Register= (props) => {
     e.preventDefault();
     const res = await addUser();
     showError(res)
+    setFormData({nameUser: "", email: "", password: ""});
+    navigate('/login');  
   }
 
   const showError = (res) => {
