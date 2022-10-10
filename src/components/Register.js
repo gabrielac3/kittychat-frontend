@@ -1,11 +1,8 @@
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
-export const Register= () => {
-  // const [errorMessage, setErrorMessage] = React.useState('default')
-  const [resMsg, setErrorMsg] = React.useState('')
-  let msgError
-  const navigate = useNavigate();
+export const Register= (props) => {
+  // const [resMsg, setErrorMsg] = React.useState('')
 
   const addUser = () => {
     return fetch('http://localhost:3100/addUser', {
@@ -49,17 +46,16 @@ export const Register= () => {
     if(indexOfEqual === undefined || indexOfEqual === -1) return
     const msgError = resMsg.slice(0, indexOfEqual)
     if(msgError === 'Key (user_name)'){
-      setErrorMsg('Username already in use')
+      props.onErrorMsg('Username already in use')
     } else if (msgError === 'Key (email)'){
-      setErrorMsg('Email already in use')
-    } else setErrorMsg('else')
+      props.onErrorMsg('Email already in use')
+    } else props.onErrorMsg('else')
   }
 
   return (
     <form className='register' onSubmit={handleSubmit}>
         <div className='form'>
             <p>Welcome</p>
-            <p>{resMsg}</p>
             <h1>Register your account</h1>
             <label>User</label>
             <input
@@ -87,7 +83,7 @@ export const Register= () => {
             <button type='submit' >Sign Up</button>
         </div>
         <p>Already have an account?
-          <Link to="/login">Sign in</Link>
+          <Link to="/login" className='anchor'>Sign in</Link>
         </p>
     </form>  
   )

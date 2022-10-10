@@ -4,6 +4,7 @@ import { Login } from './Login'
 import { Register } from './Register'
 
 export const Welcome = () => {
+  const [errorMsg, setErrorMsg] = React.useState('')
   return (
     <div className='welcome-main'>
       <div className='mountain'>
@@ -14,11 +15,12 @@ export const Welcome = () => {
           <img src='../image/logoCat.png' className="img-logo" alt='logo-cat' />
         </div>
         <Routes>
-          <Route path='/' element = {<Login />}></Route>
-          <Route path='/login' element = {<Login />}></Route>
-          <Route path='/register' element = {<Register />}></Route>
+          <Route path='/' element = {<Login onErrorMsg = {setErrorMsg} />}></Route>
+          <Route path='/login' element = {<Login onErrorMsg = {setErrorMsg} />}></Route>
+          <Route path='/register' element = {<Register onErrorMsg = { str => setErrorMsg(str)} />}></Route>
         </Routes>
       </div>
+      <div>{errorMsg}</div>
     </div>
   )
 }

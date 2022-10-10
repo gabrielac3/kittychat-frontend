@@ -129,11 +129,13 @@ select {
   border-radius: 20px;
 }
 
-.register > p {
+.register > p, .login > p {
   margin: 0;
+  font-size: .9rem;
 }
 
 .form input {
+  font-size: 0.9rem;
   border-radius: 5px;
   border-color: #3e2b6b;
   margin: 7px 0 7px 0;
@@ -143,11 +145,21 @@ select {
 .form button {
   background-color: #433574;
   padding: 8px 10px;
+  border: 0;
   border-radius: 8px;
-  margin-top: 15px;
+  margin-top: .8rem;
   margin-bottom: 15px;
   color: #fff;
   font-family: "Roboto", sans-serif;
+}
+
+.login-greeting {
+  margin-bottom: .5rem;
+}
+
+.anchor {
+  margin-left: 1rem;
+  color: #433574;
 }
 
 /* ------ Home.js ------- */
