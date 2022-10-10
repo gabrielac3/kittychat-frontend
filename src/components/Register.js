@@ -2,9 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 export const Register= () => {
-  // const [errorMessage, setErrorMessage] = React.useState('default')
   const [resMsg, setErrorMsg] = React.useState('')
-  let msgError
 
   const addUser = () => {
     return fetch('http://localhost:3100/addUser', {
@@ -16,7 +14,7 @@ export const Register= () => {
     })
     .then(res => {
       if(!res.ok) return res.json()
-      else return res.text();
+      else return res.json();
     })
     .catch(error => console.log(error))
   }
@@ -43,7 +41,7 @@ export const Register= () => {
   const showError = (res) => {
     const resMsg = res.message
     const indexOfEqual = resMsg.indexOf('=') 
-    if(!indexOfEqual) return
+    if(indexOfEqual === undefined || indexOfEqual === -1) return
     const msgError = resMsg.slice(0, indexOfEqual)
     if(msgError === 'Key (user_name)'){
       setErrorMsg('Username already in use')
@@ -84,7 +82,7 @@ export const Register= () => {
             <button type='submit' >Sign Up</button>
         </div>
         <p>Already have an account?
-          <Link to="/login">Sign in</Link>
+          <Link to="/login" className='anchor'>Sign in</Link>
         </p>
     </form>  
   )

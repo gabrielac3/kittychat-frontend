@@ -38,8 +38,8 @@ export const Login = () => {
   return (
     <div className='login'>
       <form className='form' onSubmit={handleSubmit}>
-        <p>Welcome Back</p>
-        <h1>Login to your account</h1>
+        <p className='login-greeting'>Welcome Back</p>
+        <h1 className='login-greeting'>Login to your account</h1>
         <label>Email</label>
         <input 
           type='email'
@@ -57,7 +57,7 @@ export const Login = () => {
         <button type='submit'>Login now</button>
       </form>
       <p>Dont have an account?
-        <Link to='/register'>Join today</Link>
+        <Link to='/register' className='anchor'>Join today</Link>
       </p>
 
     </div>
