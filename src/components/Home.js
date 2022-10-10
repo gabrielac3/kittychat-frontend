@@ -61,7 +61,7 @@ export const Home = ({ socket }) => {
               <p>Online</p>
             </div>
             <div className='user'>
-              <h4>Gaby cordoba</h4>
+              <h4>Gaby Córdova</h4>
               <p>Online</p>
             </div>
             <div className='user'>

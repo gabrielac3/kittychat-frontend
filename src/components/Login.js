@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
 
   const getToken = () => {
     return fetch('http://localhost:3100/login', {
@@ -33,6 +34,8 @@ export const Login = () => {
     e.preventDefault();
     const token = await getToken();
     sessionStorage.setItem ('userinfo', JSON.stringify({ 'email':formData.email, 'token': token }));
+    setFormData({email: "", password: ""});
+    navigate('/home'); 
   }
 
   return (

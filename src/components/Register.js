@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Register= () => {
   // const [errorMessage, setErrorMessage] = React.useState('default')
   const [resMsg, setErrorMsg] = React.useState('')
   let msgError
+  const navigate = useNavigate();
 
   const addUser = () => {
     return fetch('http://localhost:3100/addUser', {
@@ -16,7 +17,7 @@ export const Register= () => {
     })
     .then(res => {
       if(!res.ok) return res.json()
-      else return res.text();
+      else return res.json();
     })
     .catch(error => console.log(error))
   }
@@ -38,12 +39,14 @@ export const Register= () => {
     e.preventDefault();
     const res = await addUser();
     showError(res)
+    setFormData({nameUser: "", email: "", password: ""});
+    navigate('/login');  
   }
 
   const showError = (res) => {
     const resMsg = res.message
     const indexOfEqual = resMsg.indexOf('=') 
-    if(!indexOfEqual) return
+    if(indexOfEqual === undefined || indexOfEqual === -1) return
     const msgError = resMsg.slice(0, indexOfEqual)
     if(msgError === 'Key (user_name)'){
       setErrorMsg('Username already in use')
