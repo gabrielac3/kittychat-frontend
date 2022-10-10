@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
 export const Register= (props) => {
+  const navigate = useNavigate();
   // const [resMsg, setErrorMsg] = React.useState('')
 
   const addUser = () => {
@@ -14,7 +15,10 @@ export const Register= (props) => {
     })
     .then(res => {
       if(!res.ok) return res.json()
-      else return res.json();
+      else {
+        navigate('/login');  
+        return res.json();
+      }
     })
     .catch(error => console.log(error))
   }
@@ -36,8 +40,6 @@ export const Register= (props) => {
     e.preventDefault();
     const res = await addUser();
     showError(res)
-    setFormData({nameUser: "", email: "", password: ""});
-    navigate('/login');  
   }
 
   const showError = (res) => {
