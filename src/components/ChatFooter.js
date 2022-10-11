@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 
 export const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState('')
-  
+
   function getUserName() {
     const user = sessionStorage.getItem('userName')
     const email = JSON.parse(user).email
-    console.log(email);
     return fetch('http://localhost:3100/userName', {
       method: 'POST',
       headers: {

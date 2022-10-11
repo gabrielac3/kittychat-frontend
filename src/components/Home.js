@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { ChatAside } from './ChatAside'
 import { ChatBody } from './ChatBody'
 import { ChatFooter } from './ChatFooter'
 
@@ -51,24 +52,7 @@ export const Home = ({ socket }) => {
         </section>
 
         <section className='users-aside'>
-          <div className='users-title'>
-            <i className="fa-solid fa-users"></i>
-            <h3>Users</h3>
-          </div>
-          <div className='users-cards'>
-            <div className='user'>
-              <h4>Paola Gamarra</h4>
-              <p>Online</p>
-            </div>
-            <div className='user'>
-              <h4>Gaby Córdova</h4>
-              <p>Online</p>
-            </div>
-            <div className='user'>
-              <h4>Daniela fuentes</h4>
-              <p>Online</p>
-            </div>
-          </div>
+          <ChatAside socket={socket} />
         </section>
     </div>
   )
