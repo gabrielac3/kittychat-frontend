@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const Register= (props) => {
   // const [resMsg, setErrorMsg] = React.useState('')
-
+  const navigate = useNavigate();
   const addUser = () => {
     return fetch('http://localhost:3100/addUser', {
       method: 'POST',
