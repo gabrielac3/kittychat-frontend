@@ -9,7 +9,7 @@ function App() {
   return (
       <div className='app'>
         <Routes>
-          <Route path='/*' element = {<Welcome/>}></Route>
+          <Route path='/*' element = {<Welcome socket = {socket} />}></Route>
           <Route path='/home' element = {<Home socket = {socket} />}></Route>
         </Routes>
       </div>

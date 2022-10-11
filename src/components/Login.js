@@ -44,6 +44,8 @@ export const Login = (props) => {
     if(!res.message.includes(' ')){
       const token = res.message
       sessionStorage.setItem('userName', JSON.stringify({ 'email':formData.email, 'token': token }));
+      const {socket} = props.socket;
+      socket.emit("newUser", {userName: formData})
       setFormData({email: "", password: ""});
       navigate('/home'); 
     }
