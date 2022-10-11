@@ -3,12 +3,32 @@ import React, { useState } from 'react'
 export const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState('')
 
-  const handleSendMessage = (e) => {
+  function getUserName() {
+    const user = sessionStorage.getItem('userName')
+    const email = JSON.parse(user).email
+    return fetch('http://localhost:3100/userName', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: email })
+    })
+      .then(res => {
+        console.log(res);
+        if(!res.ok) return res.json()
+        else return res.json();
+      })
+      .catch(error => console.log(error))
+  }
+
+  const handleSendMessage = async (e) => {
     e.preventDefault();
+    const name = await getUserName()
     if(message.trim() && sessionStorage.getItem('userName')) {
+      getUserName()
       socket.emit('chat message', {
         text: message,
-        name: sessionStorage.getItem('userName'),
+        name: name.message,
         id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
       });

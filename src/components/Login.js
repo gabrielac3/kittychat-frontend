@@ -16,7 +16,7 @@ export const Login = (props) => {
       })
     })
     .then(res => {
-      if(!res.ok) return res.json().message
+      if(!res.ok) return res.json()
       else {
         navigate('/home');  
         return res.json();
@@ -41,8 +41,9 @@ export const Login = (props) => {
   async function handleSubmit (e) {
     e.preventDefault();
     const res = await getToken();
-    if(typeof res === 'string') {
-      sessionStorage.setItem ('userinfo', JSON.stringify({ 'email':formData.email, 'token': res }));
+    if(!res.message.includes(' ')){
+      const token = res.message
+      sessionStorage.setItem('userName', JSON.stringify({ 'email':formData.email, 'token': token }));
       setFormData({email: "", password: ""});
       navigate('/home'); 
     }

@@ -15,8 +15,8 @@ export const Welcome = () => {
           <img src='../image/logoCat.png' className="img-logo" alt='logo-cat' />
         </div>
         <Routes>
-          <Route path='/' element = {<Login onErrorMsg = {str => setErrorMsg(str)} />}></Route>
-          <Route path='/login' element = {<Login onErrorMsg = {str => setErrorMsg(str)} />}></Route>
+          <Route path='/' element = {<Login onErrorMsg = { str => setErrorMsg(str)} />}></Route>
+          <Route path='/login' element = {<Login onErrorMsg = { str => setErrorMsg(str)} />}></Route>
           <Route path='/register' element = {<Register onErrorMsg = { str => setErrorMsg(str)} />}></Route>
         </Routes>
       </div>
