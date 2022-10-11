@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = (props) => {
   const navigate = useNavigate();
 
   const getToken = () => {
@@ -14,7 +14,15 @@ export const Login = () => {
         email: formData.email,
         password: formData.password
       })
-    }).then(res => res.json()).then(data => data)
+    })
+    .then(res => {
+      if(!res.ok) return res.json().message
+      else {
+        navigate('/home');  
+        return res.json();
+      }
+    })
+    .catch(error => console.log(error))
   }
 
   const [formData, setFormData] = React.useState(
@@ -32,10 +40,18 @@ export const Login = () => {
 
   async function handleSubmit (e) {
     e.preventDefault();
-    const token = await getToken();
-    sessionStorage.setItem ('userinfo', JSON.stringify({ 'email':formData.email, 'token': token }));
-    setFormData({email: "", password: ""});
-    navigate('/home'); 
+    const res = await getToken();
+    if(typeof res === 'string') {
+      sessionStorage.setItem ('userinfo', JSON.stringify({ 'email':formData.email, 'token': res }));
+      setFormData({email: "", password: ""});
+      navigate('/home'); 
+    }
+    showError(res)
+  }
+
+  const showError = (res) => {
+    const resMsg = res.message
+    props.onErrorMsg(resMsg)
   }
 
   return (
