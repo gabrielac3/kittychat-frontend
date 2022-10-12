@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react'
 
 export const ChatAside = () => {
-  const [users, setUsers]= useState([{
-    name: 'te pasas'
-  }])
+  const [users, setUsers]= useState([])
 
   useEffect(()=>{
     console.log('no cambiare a axios');
-    const getUsers = async () => {
+    fetch('http://localhost:3100/users')
+      .then(res => res.json())
+      .then(json => setUsers(json))
+    /* const getUsers = async () => {
       try {
         const res = await fetch('http://localhost:3100/users');
-        console.log(res);
-        setUsers(res);
+        const resJson = await res.json()
+        setUsers(resJson);
       } catch (error) {
         console.error(error.message);
       }
     }
-    getUsers();
-  },[])
+    getUsers(); */
+  }, [])
   /* let users
   function getUsers() {
     return fetch('http://localhost:3100/users')
@@ -34,7 +35,9 @@ export const ChatAside = () => {
       <div className='users-title'>
         <i className="fa-solid fa-users"></i>
         <h3>Users</h3>
-        <p>{users}</p>
+        {users.map(user => {
+          return <p key={user.uid}>{JSON.stringify(user)}</p>
+        })}
       </div>
       <div className='users-cards'>
   {/*       { users.map(user => 
@@ -56,15 +59,3 @@ export const ChatAside = () => {
     </div>
   )
 }
-
-/* let users
-  function getUsers() {
-    return fetch('http://localhost:3100/users')
-      .then(res => {
-        if(!res.ok) return res.json()
-        else return res.json();
-      })
-      .catch(error => console.log(error))
-  }
-  users = await getUsers()
-  console.log(users); */
