@@ -23,6 +23,7 @@ export const ChatFooter = ({ socket }) => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
+    console.log('socketChatFooter',socket);
     const name = await getUserName()
     if(message.trim() && sessionStorage.getItem('userName')) {
       getUserName()
