@@ -3,10 +3,10 @@ import axios from 'axios';
 
 export const ChatAside = ({socket}) => {
   const [users, setUsers] = useState([]);
-  const [status, setStatus] = useState([]);
+  const [usersOnline, setUsersOnline] = useState([]);
 
   useEffect(()=> {
-    socket.on("newUserResponse", data => setStatus(data))
+    socket.on("newUserResponse", data => setUsersOnline(data))
 }, [socket])
 
   useEffect(() => {
@@ -21,16 +21,24 @@ export const ChatAside = ({socket}) => {
     fetchDataUser();
   }, []);
 
+  function changeState(id) {
+    setUsers((prevUsers) => {
+      return prevUsers.map((user) => {
+        return user.id === id ? { ...user, state: !user.state } : user;
+      });
+    });
+  }
+
   return (
     <>
     <div className='users-title'>
       <i className="fa-solid fa-users"></i>
       <h3>Users</h3>
     </div>
-    <p>{status}</p>
+    <p>{usersOnline}</p>
     <div className='users-cards'>
-      {users.map((user, index) =>
-        <div className='user' key={index}>     
+      {users.map((user) =>
+        <div className='user' key={user.uid} onClick = {() => changeState(user.uid)}>     
           <p>{user.user_name}</p>      
         </div>
       )}
