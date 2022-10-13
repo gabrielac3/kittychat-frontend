@@ -10,6 +10,36 @@ export const Home = ({ socket }) => {
   }, [socket, messages])
 /* -----------TESTING SOCKETS---------- */
 
+const addChannel = () => {
+  return fetch('http://localhost:3100/addChannel', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(res => {
+    if(!res.ok) return res.json()
+    else { 
+      return res.json();
+    }
+  })
+  .catch(error => console.log(error))
+}
+
+const [formData, setFormData] = React.useState(
+  {nameChannel: "", description: "", uid: "" }
+)
+
+function handleChange(event) {
+  setFormData(prevFormData => {
+      return {
+          ...prevFormData,
+          [event.target.name]: event.target.value
+      }
+  })
+}
+
   return (
     <div className='home'>
         <section className='profile-aside'>
@@ -22,8 +52,20 @@ export const Home = ({ socket }) => {
             </div>
             <p>Daphnne Reyes</p>
           </div>
-          <button>Crear canal</button>
-          <div className='channels-info'>
+          <button onClick={addChannel}>Crear canal</button>
+          <input 
+              type='text'
+              name="nameChannel"
+              value={formData.nameChannel}
+              onChange={handleChange}
+          ></input>
+          <input 
+              type='text'
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            ></input>
+           <div className='channels-info'>
             <div className='channels-title'>
               <i className="fa-solid fa-cat"></i>
               <h2>Channels</h2>

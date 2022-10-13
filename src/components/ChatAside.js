@@ -2,10 +2,24 @@ import React, { useState, useEffect }from 'react';
 import axios from 'axios';
 
 export const ChatAside = ({socket}) => {
-  const [allUsers, setAllUsers] = useState([]);
-  const [usersOnline, setUsersOnline] = useState([]);
+/*   const [allUsers, setAllUsers] = useState([]);
+  const [usersOnline, setUsersOnline] = useState([]); */
+  const [users, setUsers] = useState([]);
 
-  useEffect(()=> {
+  useEffect(() => {
+    const fetchDataUser = async () => {
+      try {
+        const response = await axios.get('http://localhost:3100/users');
+        setUsers(response.data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }    
+    fetchDataUser();
+    console.log('acaso soy un bucle?')
+  }, []);
+
+/*   useEffect(()=> {
       const fetchDataUser = async () => {
         try {
           const response = await axios.get('http://localhost:3100/users');
@@ -20,11 +34,11 @@ export const ChatAside = ({socket}) => {
               next.push(user);
             }
           })
-          setAllUsers(next);
+          setAllUsers(next); */
   /*         socket.on("newUserResponse", data => {
             console.log('data',data);
             return setUsersOnline(data)}) */
-        } catch (error) {
+/*         } catch (error) {
           console.error(error.message);
         }
       }
@@ -48,7 +62,7 @@ export const ChatAside = ({socket}) => {
           })
         }
       })
- }, [socket])
+ }, [socket]) */
 
 /*   useEffect(() => {
     const fetchDataUser = async () => {
@@ -142,10 +156,10 @@ export const ChatAside = ({socket}) => {
     </div>
 {/*     <p>{status}</p> */}
     <div className='users-cards'>
-      {allUsers.map((user, index) =>
+      {users.map((user, index) =>
         <div className='user' key={index}>     
           <p>{user.user_name}</p>
-          <p>{user.status?? 'Disconnected'}</p>       
+          <p>{user.status? 'online': 'desconectado'}</p>     
         </div>
       )}
     </div>
