@@ -16,7 +16,8 @@ export const ChatAside = ({socket}) => {
       }
     }    
     fetchDataUser();
-  }, [socket]);
+    console.log('acaso soy un bucle?')
+  }, []);
 
 /*   useEffect(()=> {
       const fetchDataUser = async () => {
