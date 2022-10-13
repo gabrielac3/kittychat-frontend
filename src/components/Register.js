@@ -52,6 +52,11 @@ export const Register= (props) => {
     } else props.onErrorMsg('else')
   }
 
+  const enabled =
+  formData.email.length > 0 &&
+  formData.nameUser.length > 0 &&
+  formData.password.length > 0 
+
   return (
     <form className='register' onSubmit={handleSubmit}>
         <div className='form'>
@@ -80,7 +85,7 @@ export const Register= (props) => {
               value={formData.password}
               onChange={handleChange}
             ></input>
-            <button type='submit' >Sign Up</button>
+            <button type='submit' disabled={!enabled}>Sign Up</button>
         </div>
         <p>Already have an account?
           <Link to="/login" className='anchor'>Sign in</Link>
