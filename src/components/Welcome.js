@@ -17,7 +17,7 @@ export const Welcome = ({socket}) => {
         <Routes>
           <Route path='/' element = {<Login onErrorMsg = { str => setErrorMsg(str)} socket={socket} />}></Route>
           <Route path='/login' element = {<Login onErrorMsg = { str => setErrorMsg(str)} socket={socket}/>}></Route>
-          <Route path='/register' element = {<Register onErrorMsg = { str => setErrorMsg(str)} />}></Route>
+          <Route path='/register' element = {<Register onErrorMsg = { str => setErrorMsg(str)} socket={socket} />}></Route>
         </Routes>
       </div>
       <div>{errorMsg}</div>

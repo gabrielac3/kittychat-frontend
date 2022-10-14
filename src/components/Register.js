@@ -15,6 +15,7 @@ export const Register= (props) => {
       if(!res.ok) return res.json()
       else {
         navigate('/login');  
+        props.socket.emit("user registered", true);
         return res.json();
       }
     })

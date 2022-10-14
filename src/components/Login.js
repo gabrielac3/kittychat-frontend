@@ -25,6 +25,22 @@ export const Login = (props) => {
     .catch(error => console.log(error))
   }
 
+  const getUserRow = () => {
+    return fetch('http://localhost:3100/userRow',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: formData.email })
+    }
+    )
+    .then(res => {
+      if(!res.ok) return res.json()
+      else return res.json();
+    })
+    .catch(error => console.log(error))
+  }
+
   const [formData, setFormData] = React.useState(
     {email: "", password: ""}
   )
@@ -42,8 +58,17 @@ export const Login = (props) => {
     e.preventDefault();
     const res = await getToken();
     if(!res.message.includes(' ')){
+      // get userRow
+      const userRow = await getUserRow()
+      console.log('login', userRow);
+      // get Token
       const token = res.message
-      sessionStorage.setItem('userName', JSON.stringify({ 'email':formData.email, 'token': token }));
+      sessionStorage.setItem('userName', JSON.stringify({
+        'email':formData.email, 
+        'uid': userRow.message.uid,
+        'user_name':userRow.message.user_name,
+        'token': token 
+      }));
       props.socket.emit("newUser", {
         email: formData.email, 
         socketID: props.socket.id
