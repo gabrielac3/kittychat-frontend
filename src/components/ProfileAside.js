@@ -4,6 +4,7 @@ import { ModalCreateChannel } from './ModalCreateChannel';
 
 export const ProfileAside = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [newChannel, setNewChannel] = useState('');
   const [channels, setChannels] = useState([]);
   // const [channelInfo, setChannelInfo] = useState([]);
   const user = JSON.parse(sessionStorage.getItem('userName'))
@@ -18,7 +19,7 @@ export const ProfileAside = (props) => {
       }
     }    
     fetchDataUser();
-  }, []);
+  }, [newChannel]);
   useEffect(() => {
     console.log(channels);
   }, [channels])
@@ -60,7 +61,7 @@ export const ProfileAside = (props) => {
       </div>
 
       <button onClick={() => setIsOpen(true)}>Crear canal</button>
-      {isOpen && <ModalCreateChannel setIsOpen={setIsOpen} />}
+      {isOpen && <ModalCreateChannel setIsOpen={setIsOpen} setNewChannel={setNewChannel} />}
 
       <div className="channels-info">
         <div className="channels-title">

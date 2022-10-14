@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ModalCreateChannel = ({ setIsOpen }) => {
+export const ModalCreateChannel = ({ setIsOpen, setNewChannel }) => {
   const user = JSON.parse(sessionStorage.getItem('userName'))
   const addChannel = () => {
     return fetch('http://localhost:3100/addChannel', {
@@ -8,7 +8,12 @@ export const ModalCreateChannel = ({ setIsOpen }) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({
+        nameChannel: formData.nameChannel,
+        description: formData.description,
+        uid: formData.uid,
+        token: user.token
+      })
     })
     .then(res => {
       if(!res.ok) return res.json()
@@ -35,7 +40,11 @@ export const ModalCreateChannel = ({ setIsOpen }) => {
 
   async function createChannel(event) {
     event.preventDefault();
-    await addChannel();
+    if(user.token){
+      await addChannel();
+      setNewChannel(formData.nameChannel)
+    } 
+    else console.log('user unidentified');
     setIsOpen(false);
   }
   
