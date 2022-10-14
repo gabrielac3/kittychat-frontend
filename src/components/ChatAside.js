@@ -140,14 +140,6 @@ export const ChatAside = ({socket}) => {
     }
   } */
 
-  function changeState(id) {
-    setUsers((prevUsers) => {
-      return prevUsers.map((user) => {
-        return user.id === id ? { ...user, state: !user.state } : user;
-      });
-    });
-  }
-
   return (
     <>
     <div className='users-title'>
