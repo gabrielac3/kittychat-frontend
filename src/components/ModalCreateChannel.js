@@ -6,7 +6,8 @@ export const ModalCreateChannel = ({ setIsOpen, setNewChannel }) => {
     return fetch('http://localhost:3100/addChannel', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       },
       body: JSON.stringify({
         nameChannel: formData.nameChannel,
