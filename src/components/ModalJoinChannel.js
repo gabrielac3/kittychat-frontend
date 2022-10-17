@@ -1,24 +1,25 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export const ModalJoinChannel = ({ 
-  setIsOpenJoinChannel, active, channelInfo, user
+  setIsOpenJoinChannel, channelInfo, user, socket
 }) => {
   async function sendChannelName(channelInfo, user){
-    setIsOpenJoinChannel(false)
     try {
-      const response = await axios.post('http://localhost:3100/channelByName', {
-        channelName: channelInfo.name_channel,
+      await axios.post('http://localhost:3100/addUserToChannel', {
+        cid: channelInfo.cid,
         uid: user.uid
       });
     } catch (error) {
       console.error(error.message);
     }
+    socket.emit("joinChannel", channelInfo)
+    setIsOpenJoinChannel(prev => !prev)
   }
   return (
-    <div className={active ? "modal active" : "modal"}>
-      <button>Unirme</button>
-      {/* <button onClick={()=> sendChannelName(channelInfo, user)}>Cancelar</button> */}
+    <div>
+      <button onClick={()=> sendChannelName(channelInfo, user)}>Unirme</button>
+      <button onClick={()=> setIsOpenJoinChannel(prev => !prev)}>Cancelar</button>
     </div>
   )
 }

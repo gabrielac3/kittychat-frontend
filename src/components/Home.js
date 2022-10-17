@@ -18,7 +18,7 @@ export const Home = ({ socket }) => {
   return (
     <div className='home'>
         <section className='profile-aside'>
-          <ProfileAside setChannelInfo = {setChannelInfo} ></ProfileAside>
+          <ProfileAside setChannelInfo = {setChannelInfo} socket={socket} />
         </section>
 
         <section className='main'>
