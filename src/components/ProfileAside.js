@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ModalCreateChannel } from './ModalCreateChannel';
+import { ModalJoinChannel } from './ModalJoinChannel';
 
 export const ProfileAside = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenJoinChannel, setIsOpenJoinChannel] = useState(false);
   const [newChannel, setNewChannel] = useState('');
   const [channels, setChannels] = useState([]);
-  // const [channelInfo, setChannelInfo] = useState([]);
   const user = JSON.parse(sessionStorage.getItem('userName'))
   useEffect(() => {
     const fetchDataUser = async () => {
@@ -24,7 +25,8 @@ export const ProfileAside = (props) => {
     console.log(channels);
   }, [channels])
 
-  const getChannelInfo = async(channelName) => {
+  const getChannelInfo = async(channelName, index) => {
+    setIsOpenJoinChannel(index)
     try {
       const response = await axios.post('http://localhost:3100/channelByName', {
         channelName: channelName
@@ -34,19 +36,7 @@ export const ProfileAside = (props) => {
     } catch (error) {
       console.error(error.message);
     }
-  }    
-/*   const addUserToChannel = async() => {
-    try {
-      const response = await axios.post('http://localhost:3100/addUserChannel', {
-        uid: user.uid,
-        cid: 'Flintstone'
-      });
-      console.log(response.data);
-      setChannels(response.data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  } */    
+  }      
 
   return (
     <>
@@ -61,19 +51,36 @@ export const ProfileAside = (props) => {
       </div>
 
       <button onClick={() => setIsOpen(true)}>Crear canal</button>
-      {isOpen && <ModalCreateChannel setIsOpen={setIsOpen} setNewChannel={setNewChannel} />}
+      {isOpen && 
+      <ModalCreateChannel 
+        setIsOpen={setIsOpen} 
+        setNewChannel={setNewChannel} 
+      />}
 
       <div className="channels-info">
         <div className="channels-title">
           <i className="fa-solid fa-cat"></i>
           <h2>Channels</h2>
         </div>
+
+{/*         {isOpenJoinChannel && 
+        <ModalJoinChannel 
+        setIsOpenJoinChannel={setIsOpenJoinChannel}
+        />} */}
         <ul className="channels">
-          { channels.map(channel => 
-            <div>
-              <li key={channel.cid}>{channel.name_channel}</li>
-              <span onClick={() => getChannelInfo(channel.name_channel)}>+</span>
-            </div>
+          { channels.map((channel, index) => 
+            <>
+              <div>
+                <li key={channel.cid}>{channel.name_channel}</li>
+                <span onClick={() => getChannelInfo(channel.name_channel, index)}>+</span>
+              </div>
+              <ModalJoinChannel 
+                active={isOpenJoinChannel === index}
+                channelInfo = {channel}
+                setIsOpenJoinChannel={setIsOpenJoinChannel}
+                user = {user}
+              />
+            </>
           )}
         </ul>
       </div>
