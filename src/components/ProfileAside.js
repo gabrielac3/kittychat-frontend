@@ -8,6 +8,7 @@ export const ProfileAside = (props) => {
   const [channels, setChannels] = useState([]);
   // const [channelInfo, setChannelInfo] = useState([]);
   const user = JSON.parse(sessionStorage.getItem('userName'))
+
   useEffect(() => {
     const fetchDataUser = async () => {
       try {
@@ -20,6 +21,7 @@ export const ProfileAside = (props) => {
     }    
     fetchDataUser();
   }, [newChannel]);
+
   useEffect(() => {
     console.log(channels);
   }, [channels])
@@ -57,7 +59,7 @@ export const ProfileAside = (props) => {
         <div>
           <img src="../image/user-img.png" alt="profile-img" />
         </div>
-        <p>ARREGLAR</p>
+        <p>{user? user.user_name:'no existo'}</p>
       </div>
 
       <button onClick={() => setIsOpen(true)}>Crear canal</button>
