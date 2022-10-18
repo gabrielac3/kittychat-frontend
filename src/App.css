@@ -172,31 +172,6 @@ select {
   height: 100%;
 }
 
-/* ------- Modals -------- */
-.modal-join-to-channel {
-  position: fixed;
-  background: #f3f3f3;
-  width: 30%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  padding: 1rem;
-  border-radius: 1rem;
-}
-
-.modal-join-to-channel p {
-  color: #433574;
-  font-weight: 500;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
- }
- 
-.modal-join-to-channel button { background: #433574; }
-.modal-join-to-channel > div {
-  justify-content: space-between;
- }
- 
-
 /* ----1.1. aside profile---- */
 .profile {
   text-align: center;
@@ -400,6 +375,51 @@ select {
   padding: .5rem;
   border-radius: .5em;
 } 
+
+
+/* ------- Modals -------- */
+.modal-shadow-bg {
+  margin-top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.modal {
+  position: fixed;
+  background: #f3f3f3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  z-index: 10;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.m-create-channel {
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal h3 {
+  color: #433574;
+}
+
+.m-join-to-channel h3 {margin-bottom: 2rem;}
+ 
+.modal button { background: #433574; }
+
+.modal-btns {justify-content: space-between;}
+.modal-btns button {
+  width: 40%;
+}
 
 @media (max-width: 768px) {
   .halfPurple {

@@ -50,21 +50,28 @@ export const ModalCreateChannel = ({ setIsOpen, setNewChannel }) => {
   }
   
   return (
-    <form>
-      <input 
-          type='text'
-          name="nameChannel"
-          value={formData.nameChannel}
-          onChange={handleChange}
-      ></input>
-      <input 
-          type='text'
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-      ></input>
-      <button type='submit' onClick={createChannel}>Crear canal</button>
-      <button onClick={() => setIsOpen(false)}>Cancelar</button>
-    </form>
+    <div className='modal-shadow-bg'>
+      <form className='modal m-create-channel flex'>
+        <h3>Crear canal</h3>
+        <input 
+            type='text'
+            name="nameChannel"
+            value={formData.nameChannel}
+            onChange={handleChange}
+            placeholder = 'nombre del canal'
+        ></input>
+        <textarea 
+            type='text'
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder = 'descripcion del canal'
+        ></textarea>
+        <div className='modal-btns flex'>
+          <button type='submit' onClick={createChannel}>Crear canal</button>
+          <button onClick={() => setIsOpen(false)}>Cancelar</button>
+        </div>
+      </form>
+    </div>
   )
 }
