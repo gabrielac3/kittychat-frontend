@@ -17,9 +17,12 @@ export const ModalJoinChannel = ({
     setIsOpenJoinChannel(prev => !prev)
   }
   return (
-    <div>
-      <button onClick={()=> sendChannelName(channelInfo, user)}>Unirme</button>
-      <button onClick={()=> setIsOpenJoinChannel(prev => !prev)}>Cancelar</button>
+    <div className='modal-join-to-channel'>
+      <p>Deseas unirte a este canal?</p>
+      <div className='flex'>
+        <button onClick={()=> sendChannelName(channelInfo, user)}>Unirme</button>
+        <button onClick={()=> setIsOpenJoinChannel(prev => !prev)}>Cancelar</button>
+      </div>
     </div>
   )
 }

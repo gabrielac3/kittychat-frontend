@@ -172,6 +172,31 @@ select {
   height: 100%;
 }
 
+/* ------- Modals -------- */
+.modal-join-to-channel {
+  position: fixed;
+  background: #f3f3f3;
+  width: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.modal-join-to-channel p {
+  color: #433574;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+ }
+ 
+.modal-join-to-channel button { background: #433574; }
+.modal-join-to-channel > div {
+  justify-content: space-between;
+ }
+ 
+
 /* ----1.1. aside profile---- */
 .profile {
   text-align: center;
@@ -210,15 +235,51 @@ select {
   max-width: 100%;
 }
 
+.channels {
+  max-height: 50%;
+  overflow-y: scroll;
+}
+
+.channels > * + * {
+  margin-top: .7rem;
+}
+
 .channels-title {
   display: flex;
   align-items: center;
   justify-content: safe;
+  gap: 1.4rem;
 } 
 
-.channels-title h2 {
-  margin-left: 1rem;
+.channels-title .fa-cat { margin-left: .4em; }
+
+.aside-profile--channel {
+  gap: 1rem;
+  margin-bottom: .8rem;
+  align-items: center;
 }
+
+.aside-profile--channel span {
+  background: #cb7bb7;
+  padding: .2em .3em;
+  border-radius: .4em;
+}
+
+.aside-profile--channel li { font-weight: 500;}
+
+/* scroll bar */
+.channels::-webkit-scrollbar {
+  width: .4rem;
+}
+.channels::-webkit-scrollbar-track {
+  background: #f8f3f3;
+}
+.channels::-webkit-scrollbar-thumb {
+  background: #a2adf6;
+}
+.channels::-webkit-scrollbar-thumb:hover {
+  background: #a66b97;
+} 
 
 /* ----1.2. seccion main----- */
 .chat-message {
@@ -227,6 +288,15 @@ select {
   align-items: center;
   padding-inline: 1rem;
 }
+
+.chat-message > button {
+  background: #cb7bb7;
+  border: none;
+  color: #f8f3f3;
+  border-radius: 50%;
+  padding: .2em .4em;
+ }
+ 
 
 .chat-message ::placeholder {
   color: #CB7BB7;
@@ -250,7 +320,7 @@ select {
 
 .main {
   display: grid;
-  grid-template-rows: 10% 83% 7%;
+  grid-template-rows: 10% 82% 8%;
   /* max-height: 100%; */
  } 
 
