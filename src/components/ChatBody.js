@@ -1,12 +1,13 @@
 import React from 'react'
 
-export const ChatBody = ({messages}) => {
+export const ChatBody = ({ messages, channelInfo }) => {
   const userName = sessionStorage.getItem('userName')
   return (
     <div className='chat-main'>
 
      { messages.map(message => 
-      message.name === userName ? (
+      message.room.name_channel === channelInfo.name_channel && (
+        message.name === userName.user_name ? (
         <div className="user-chats flex" key={message.id}>
           <p className="sender-name">You</p>
           <span className="sender-msg msg-recipient">
@@ -21,7 +22,7 @@ export const ChatBody = ({messages}) => {
           </span>
         </div>
       )
-     )}
+     ))}
     </div>
   )
 }

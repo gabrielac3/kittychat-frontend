@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const ChatFooter = ({ socket }) => {
+export const ChatFooter = ({ socket, channelInfo }) => {
   const [message, setMessage] = useState('')
   
   const handleSendMessage = async (e) => {
@@ -12,6 +12,7 @@ export const ChatFooter = ({ socket }) => {
         name: user.user_name,
         id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
+        room: channelInfo
       });
     }
     setMessage('');

@@ -41,8 +41,9 @@ export const ProfileAside = (props) => {
   }      
 
   const joinChannel = (event) => {
-    props.socket.emit("joinChannel", joinChannelData)
-    console.log('funcion?', joinChannelData, event.target.textContent);
+    // props.socket.emit("jo inChannel", joinChannelData)
+    props.socket.emit("joinChannel", event.target.textContent)
+    // console.log('funcion?', joinChannelData, event.target.textContent);
   }
 
   return (

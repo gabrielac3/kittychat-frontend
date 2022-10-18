@@ -11,8 +11,8 @@ export const Home = ({ socket }) => {
     socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
   }, [socket, messages])
   useEffect(()=> {
-    console.log(channelInfo);
-  }, [channelInfo])
+    console.log('messages body', messages);
+  }, [messages])
 /* -----------TESTING SOCKETS---------- */
 
   return (
@@ -32,9 +32,9 @@ export const Home = ({ socket }) => {
             </div>
           </div>
 
-          <ChatBody messages={messages}/>
+          <ChatBody messages={messages} channelInfo = {channelInfo}/>
 
-          <ChatFooter socket={socket} />
+          <ChatFooter socket={socket} channelInfo = {channelInfo} />
         </section>
 
         <section className='users-aside'>
