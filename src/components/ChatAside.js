@@ -4,12 +4,19 @@ import axios from 'axios';
 export const ChatAside = ({socket}) => {
   const [users, setUsers] = useState([]);
   const [test, setTest] = useState([]);
+  const [test2, setTest2] = useState([]);
   const [userAdded, setUserAdded] = useState('');
   useEffect(()=> {
     socket.on("user registered", isUserAdded => setUserAdded(isUserAdded))
     socket.on("newUserResponse", test => {
+      console.log(test);
+      console.log(socket.id);
       setTest(test) //test = 'test' xa USER1
       console.log('im connected');
+    })
+    socket.on("socket.id", test => {
+      setTest2(test) //test = 'test' xa USER1
+      console.log('recon');
     })
   }, [socket])
 
@@ -24,7 +31,7 @@ export const ChatAside = ({socket}) => {
     }    
     fetchDataUser();
     console.log('acaso soy un bucle?')
-  }, [userAdded, test]);
+  }, [userAdded, test, test2]);
 
   return (
     <>

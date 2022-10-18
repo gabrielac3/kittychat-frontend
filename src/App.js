@@ -5,6 +5,18 @@ import { Home } from './components/Home';
 import io from 'socket.io-client';
 
 const socket = io("http://localhost:3300/");
+
+socket.on('connect', () => {
+  let user = JSON.parse(sessionStorage.getItem('userName'));
+  if (user !== null){
+    console.log(user, socket.id)
+    socket.emit("reconnect", {
+      email: user.email,
+      socketID: socket.id
+    })
+  }
+});
+
 function App() {
   return (
       <div className='app'>
