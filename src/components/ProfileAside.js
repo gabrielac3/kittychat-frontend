@@ -79,9 +79,11 @@ export const ProfileAside = (props) => {
         />}
         <ul className="channels">
           { channels.map((channel) => 
-            <div>
+            <div className='aside-profile--channel flex'>
+              <span onClick={() => getChannelInfo(channel)}>
+                <i className="fa-solid fa-user-plus"></i>
+              </span>
               <li key={channel.cid} onClick = {joinChannel}>{channel.name_channel}</li>
-              <span onClick={() => getChannelInfo(channel)}>+</span>
             </div>
           )}
         </ul>
