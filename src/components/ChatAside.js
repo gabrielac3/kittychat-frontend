@@ -16,7 +16,6 @@ export const ChatAside = ({socket}) => {
     })
     socket.on("socket.id", test => {
       setTest2(test) //test = 'test' xa USER1
-      console.log('recon');
     })
   }, [socket])
 

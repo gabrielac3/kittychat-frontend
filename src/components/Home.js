@@ -6,7 +6,8 @@ import { ProfileAside } from './ProfileAside'
 
 export const Home = ({ socket }) => {
   const [messages, setMessages] = useState([])
-  const [channelInfo, setChannelInfo] = useState([]);
+  const [channelInfo, setChannelInfo] = useState({ name_channel:'Canal General',
+  description:'Canal General' });
   useEffect(()=> {
     socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
   }, [socket, messages])

@@ -69,6 +69,7 @@ export const Login = (props) => {
         'user_name':userRow.message.user_name,
         'token': token 
       }));
+
       props.socket.emit("newUser", {
         email: formData.email, 
         socketID: props.socket.id

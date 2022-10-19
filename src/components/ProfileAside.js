@@ -12,7 +12,7 @@ export const ProfileAside = (props) => {
   //channels
   const [newChannel, setNewChannel] = useState('');
   const [channels, setChannels] = useState([]);
-  const user = JSON.parse(sessionStorage.getItem('userName'))
+  const user = JSON.parse(sessionStorage.getItem('userName'));
 
   useEffect(() => {
     const fetchDataUser = async () => {
