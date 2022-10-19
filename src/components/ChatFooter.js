@@ -6,14 +6,26 @@ export const ChatFooter = ({ socket, channelInfo }) => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     const user = JSON.parse(sessionStorage.getItem('userName'))
+    console.log(channelInfo.name_channel);
     if(message.trim() && sessionStorage.getItem('userName')) {
-      socket.emit('chat message', {
-        text: message,
-        name: user.user_name,
-        id: `${socket.id}${Math.random()}`,
-        socketID: socket.id,
-        room: channelInfo
-      });
+      if(channelInfo.name_channel==='Canal General'){
+        socket.emit('general room', {
+          text: message,
+          name: user.user_name,
+          id: `${socket.id}${Math.random()}`,
+          socketID: socket.id,
+          room: channelInfo
+        });
+
+      }else{
+        socket.emit('chat message', {
+          text: message,
+          name: user.user_name,
+          id: `${socket.id}${Math.random()}`,
+          socketID: socket.id,
+          room: channelInfo
+        });
+    }
     }
     setMessage('');
   }

@@ -4,12 +4,13 @@ import { ChatBody } from './ChatBody'
 import { ChatFooter } from './ChatFooter'
 import { ProfileAside } from './ProfileAside'
 
-export const Home = ({ socket }) => {
+export const Home = ({ socket, user }) => {
   const [messages, setMessages] = useState([])
   const [channelInfo, setChannelInfo] = useState({ name_channel:'Canal General',
   description:'Canal General' });
   useEffect(()=> {
     socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
+    socket.on("general room", msgInfo => setMessages([...messages, msgInfo]))
   }, [socket, messages])
   useEffect(()=> {
     console.log('messages body', messages);
@@ -19,7 +20,7 @@ export const Home = ({ socket }) => {
   return (
     <div className='home'>
         <section className='profile-aside'>
-          <ProfileAside setChannelInfo = {setChannelInfo} socket={socket} />
+          <ProfileAside setChannelInfo = {setChannelInfo} socket={socket} user={user}/>
         </section>
 
         <section className='main'>

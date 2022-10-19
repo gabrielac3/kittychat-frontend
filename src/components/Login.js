@@ -62,7 +62,8 @@ export const Login = (props) => {
       const userRow = await getUserRow()
       console.log('login', userRow);
       // get Token
-      const token = res.message
+      const token = res.message;
+      props.setUser(userRow.message.user_name);
       sessionStorage.setItem('userName', JSON.stringify({
         'email':formData.email, 
         'uid': userRow.message.uid,

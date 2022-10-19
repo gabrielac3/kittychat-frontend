@@ -55,7 +55,7 @@ export const ProfileAside = (props) => {
         <div>
           <img src="../image/user-img.png" alt="profile-img" />
         </div>
-        <p>{user? user.user_name:'no existo'}</p>
+        <p>{props.user}</p>
       </div>
 
       <button onClick={() => setIsOpen(true)}>Crear canal</button>

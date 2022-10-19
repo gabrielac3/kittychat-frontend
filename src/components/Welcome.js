@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Login } from './Login'
 import { Register } from './Register'
 
-export const Welcome = ({socket}) => {
+export const Welcome = ({socket, setUser}) => {
   const [errorMsg, setErrorMsg] = React.useState('')
   return (
     <div className='welcome-main'>
@@ -15,8 +15,8 @@ export const Welcome = ({socket}) => {
           <img src='../image/logoCat.png' className="img-logo" alt='logo-cat' />
         </div>
         <Routes>
-          <Route path='/' element = {<Login onErrorMsg = { str => setErrorMsg(str)} socket={socket} />}></Route>
-          <Route path='/login' element = {<Login onErrorMsg = { str => setErrorMsg(str)} socket={socket}/>}></Route>
+          <Route path='/' element = {<Login onErrorMsg = { str => setErrorMsg(str)} socket={socket} setUser={setUser} />}></Route>
+          <Route path='/login' element = {<Login onErrorMsg = { str => setErrorMsg(str)} socket={socket} setUser={setUser}/>}></Route>
           <Route path='/register' element = {<Register onErrorMsg = { str => setErrorMsg(str)} socket={socket} />}></Route>
         </Routes>
       </div>
