@@ -18,7 +18,7 @@ export const Login = (props) => {
     .then(res => {
       if(!res.ok) return res.json()
       else {
-        navigate('/home');  
+/*         navigate('/home');  */ 
         return res.json();
       }
     })
