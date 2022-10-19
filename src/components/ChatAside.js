@@ -1,12 +1,26 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect, useRef }from 'react';
 import axios from 'axios';
 
 export const ChatAside = ({socket}) => {
   const [users, setUsers] = useState([]);
+  const [users1, setUsers1] = useState([]);
   const [userAdded, setUserAdded] = useState('');
+  const count = useRef([]);
+  // const [inputValue, setInputValue] = useState("");
+  // const previousInputValue = useRef("");
+
+  // useEffect(() => {
+  //   previousInputValue.current = inputValue;
+  // }, [inputValue]);
+  useEffect(() => {
+    count.current = users1
+    console.log(count.current)
+    console.log(users1)
+  }, [users1]);
   useEffect(()=> {
     socket.on("user registered", isUserAdded => setUserAdded(isUserAdded))
     socket.on("newUserResponse", fetchDataUser);
+    socket.on("usersInRoom", usersInRoom => setUsers1(usersInRoom));
   }, [socket])
 
   const fetchDataUser = async () => {
@@ -34,9 +48,16 @@ export const ChatAside = ({socket}) => {
       {users.map((user, index) =>
         <div className='user' key={index}>     
           <p>{user.user_name}</p>
-          <p>{user.status? 'online': 'desconectado'}</p>     
+          <p>{user.status? 'online': 'desconectado'}</p>
         </div>
       )}
+      {count.current &&
+      count.current.map((user) =>
+        <div className='user' key={user.uid}> 
+          <p>{user.user_name}</p>
+        </div>
+      )}
+      <p>{userAdded} aqui hay algo?</p>
     </div>
   </>
   )
