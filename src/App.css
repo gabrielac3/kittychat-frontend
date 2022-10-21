@@ -421,6 +421,31 @@ select {
   width: 40%;
 }
 
+.welcome-modal-error {
+  position: absolute;
+  top: 3%;
+  right: 2%;
+  border: 1px solid;
+  border-radius: .5em;
+  padding: 1rem;
+  color: #D8000C;
+  background-color: #FFBABA;
+  background-image: url('https://i.imgur.com/GnyDvKN.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+.hide-modal { 
+  display: none;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}
+
+.error {
+  margin-left: 2rem;
+}
+
 @media (max-width: 768px) {
   .halfPurple {
     grid-template-rows: 33% 45%;

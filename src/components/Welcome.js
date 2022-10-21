@@ -5,6 +5,12 @@ import { Register } from './Register'
 
 export const Welcome = ({socket, setUser}) => {
   const [errorMsg, setErrorMsg] = React.useState('')
+  if(errorMsg) {
+    setTimeout(() => {
+      document.querySelector('.welcome-modal-error').classList.add('hide-modal')
+      console.log('hide');
+    }, 3000);
+  }
   return (
     <div className='welcome-main'>
       <div className='mountain'>
@@ -20,7 +26,12 @@ export const Welcome = ({socket, setUser}) => {
           <Route path='/register' element = {<Register onErrorMsg = { str => setErrorMsg(str)} socket={socket} />}></Route>
         </Routes>
       </div>
-      <div>{errorMsg}</div>
+      {
+        errorMsg &&
+        <div className='welcome-modal-error'>
+          <p className='error'>{errorMsg}</p>
+        </div>
+      }
     </div>
   )
 }
