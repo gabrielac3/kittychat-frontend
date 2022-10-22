@@ -1,12 +1,18 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect, useRef }from 'react';
 import axios from 'axios';
 
 export const ChatAside = ({socket}) => {
   const [users, setUsers] = useState([]);
+  const [users1, setUsers1] = useState([]);
   const [userAdded, setUserAdded] = useState('');
+  
+  useEffect(() => {
+    console.log('🟡: user from my room',users1)
+  }, [users1]);
   useEffect(()=> {
     socket.on("user registered", isUserAdded => setUserAdded(isUserAdded))
     socket.on("newUserResponse", fetchDataUser);
+    socket.on("usersInRoom", usersInRoom => setUsers1(usersInRoom));
   }, [socket])
 
   const fetchDataUser = async () => {
@@ -19,7 +25,7 @@ export const ChatAside = ({socket}) => {
   }    
 
   useEffect(() => {
-      fetchDataUser();
+    fetchDataUser();
     console.log('acaso soy un bucle?')
   }, [userAdded]);
 
@@ -29,14 +35,28 @@ export const ChatAside = ({socket}) => {
       <i className="fa-solid fa-users"></i>
       <h3>Users</h3>
     </div>
-{/*     <p>{status}</p> */}
     <div className='users-cards'>
-      {users.map((user, index) =>
-        <div className='user' key={index}>     
+      { users1.current ? ( users1.current === 1 &&
+        users.map(user =>
+        <div className='user' key={user.uid}>     
           <p>{user.user_name}</p>
-          <p>{user.status? 'online': 'desconectado'}</p>     
+          <p>{user.status? 'En línea': 'Desconectado'}</p>
+        </div>)
+        ) : (
+          users.map(user =>
+          <div className='user' key={user.uid}>     
+            <p>{user.user_name}</p>
+            <p>{user.status? 'En línea': 'Desconectado'}</p>
+          </div>
+        )
+      )}
+      {users1[users1.current] && users1.current !== 1 &&
+        users1[users1.current].map((user) =>
+        <div className='user' key={user.uid}> 
+          <p>{user.user_name}</p>
         </div>
       )}
+      <p>{JSON.stringify(users1)}</p>
     </div>
   </>
   )

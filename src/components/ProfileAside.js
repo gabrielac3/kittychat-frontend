@@ -41,9 +41,7 @@ export const ProfileAside = (props) => {
   }      
 
   const joinChannel = (event) => {
-    // props.socket.emit("jo inChannel", joinChannelData)
     props.socket.emit("joinChannel", event.target.textContent)
-    // console.log('funcion?', joinChannelData, event.target.textContent);
   }
 
   return (
@@ -80,11 +78,11 @@ export const ProfileAside = (props) => {
         />}
         <ul className="channels">
           { channels.map((channel) => 
-            <div className='aside-profile--channel flex'>
+            <div className='aside-profile--channel flex' key={channel.key}>
               <span onClick={() => getChannelInfo(channel)}>
                 <i className="fa-solid fa-user-plus"></i>
               </span>
-              <li key={channel.cid} onClick = {joinChannel}>{channel.name_channel}</li>
+              <li onClick = {joinChannel}>{channel.name_channel}</li>
             </div>
           )}
         </ul>
