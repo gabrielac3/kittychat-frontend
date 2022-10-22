@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ModalCreateChannel } from './ModalCreateChannel';
 import { ModalJoinChannel } from './ModalJoinChannel';
+import { useNavigate } from "react-router-dom";
 
 export const ProfileAside = (props) => {
+  const navigate = useNavigate();
   //modals
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenJoinChannel, setIsOpenJoinChannel] = useState(false);
@@ -42,6 +44,13 @@ export const ProfileAside = (props) => {
 
   const joinChannel = (event) => {
     props.socket.emit("joinChannel", event.target.textContent)
+  }
+
+  const logOut = () => {
+    props.socket.emit('logOut');
+    console.log('cerrar sesión');
+    navigate('/login');
+    sessionStorage.clear();
   }
 
   return (
@@ -86,6 +95,10 @@ export const ProfileAside = (props) => {
             </div>
           )}
         </ul>
+      </div>
+      <div onClick={logOut}>
+      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+      <p>Cerrar sesión</p>
       </div>
     </>
   );

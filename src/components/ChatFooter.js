@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import InputEmoji from "react-input-emoji";
 
 export const ChatFooter = ({ socket, channelInfo }) => {
   const [message, setMessage] = useState('')
+  const [text, setText] = useState("");
   
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -29,15 +31,21 @@ export const ChatFooter = ({ socket, channelInfo }) => {
     }
     setMessage('');
   }
+  function handleOnEnter(text) {
+    console.log("enter", text);
+  }
+
 
   return (
     <form className='chat-message' onSubmit={handleSendMessage}>
-      <input 
-        type='text' 
-        placeholder='Type your message'
-        value={message}
-        onChange = { e => setMessage(e.target.value)}
-      />
+      <InputEmoji
+      type='text' 
+      value={message}
+      onChange={setMessage}
+      placeholder="Type your message"
+      onEnter={handleSendMessage}
+      
+    />
       <button>
         <i className="fa-solid fa-paper-plane"></i>
       </button>

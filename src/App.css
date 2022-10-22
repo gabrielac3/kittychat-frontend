@@ -283,14 +283,35 @@ select {
   height: 15px;
 }
 
-.chat-message input {
+.react-input-emoji--input {
   border-radius: 1rem;
   width: 90%;
   background: #433574;
   color: #CB7BB7;
   border: 1px solid #CB7BB7;
   font-weight: 500;
-  padding: .2rem 1rem;
+  padding: .2rem 1rem !important;
+}
+
+.react-input-emoji--button svg {
+  fill: #CB7BB7 !important;
+}
+
+.react-input-emoji--button {
+  position: relative;
+  display: flex !important;
+  align-self: center;
+  text-align: center;
+  padding: 0 10px;
+  overflow: hidden;
+  transition: color 0.1s ease-out;
+  margin: 0;
+  box-shadow: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .main {
