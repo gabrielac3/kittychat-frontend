@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { ModalCreateChannel } from './ModalCreateChannel';
 import { ModalJoinChannel } from './ModalJoinChannel';
 import { useNavigate } from "react-router-dom";
+import { ModalChooseAvatar } from './ModalChooseAvatar';
 
 export const ProfileAside = (props) => {
   const navigate = useNavigate();
   //modals
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenJoinChannel, setIsOpenJoinChannel] = useState(false);
+  const [isOpen, setIsOpen] = useState({
+    joinChannel: false,
+    createChannel: false,
+    chooseAvatar: false
+  });
   const [joinChannelData, setJoinChannelData] = useState(false);
 
   //channels
@@ -28,8 +32,12 @@ export const ProfileAside = (props) => {
     fetchDataUser();
   }, [newChannel]);
 
+  const toggleModal = modal => {
+    setIsOpen({...isOpen, [modal]: !isOpen[modal]})
+  }
+
   const getChannelInfo = async(channel) => {
-    setIsOpenJoinChannel(prev => !prev)
+    toggleModal('joinChannel')
     setJoinChannelData(channel)
     try {
       const response = await axios.post('http://localhost:3100/channelByName', {
@@ -61,26 +69,32 @@ export const ProfileAside = (props) => {
       <div className="profile">
         <div>
           <img src="../image/user-img.png" alt="profile-img" />
+          <span onClick={() => toggleModal('chooseAvatar')}>+</span>
         </div>
         <p>{props.user}</p>
       </div>
+      {isOpen.chooseAvatar && 
+      <ModalChooseAvatar 
+        toggleModal={toggleModal}
+        user = { user } 
+      />}
 
-      <button onClick={() => setIsOpen(true)}>Crear canal</button>
-      {isOpen && 
+      <button onClick={() => toggleModal('createChannel')} className='cursor-btn'>Crear canal</button>
+      {isOpen.createChannel && 
       <ModalCreateChannel 
-        setIsOpen={setIsOpen} 
+        toggleModal={toggleModal} 
         setNewChannel={setNewChannel} 
       />}
 
-      <div className="channels-info">
+      <div className="channels-info flex">
         <div className="channels-title">
           <i className="fa-solid fa-cat"></i>
           <h2>Channels</h2>
         </div>
 
-        {isOpenJoinChannel && 
+        {isOpen.joinChannel && 
         <ModalJoinChannel 
-          setIsOpenJoinChannel={ setIsOpenJoinChannel }
+          toggleModal={ toggleModal }
           channelInfo = { joinChannelData }
           user = { user }
           socket = { props.socket }
@@ -88,7 +102,7 @@ export const ProfileAside = (props) => {
         <ul className="channels">
           { channels.map((channel) => 
             <div className='aside-profile--channel flex' key={channel.key}>
-              <span onClick={() => getChannelInfo(channel)}>
+              <span onClick={() => getChannelInfo(channel)} className='cursor-btn'>
                 <i className="fa-solid fa-user-plus"></i>
               </span>
               <li onClick = {joinChannel}>{channel.name_channel}</li>
@@ -96,9 +110,9 @@ export const ProfileAside = (props) => {
           )}
         </ul>
       </div>
-      <div onClick={logOut}>
-      <i className="fa-solid fa-arrow-right-from-bracket"></i>
-      <p>Cerrar sesión</p>
+      <div onClick={logOut} className='logOut'>
+        <i className="fa-solid fa-arrow-right-from-bracket cursor-btn"></i>
+        <p>Cerrar sesión</p>
       </div>
     </>
   );

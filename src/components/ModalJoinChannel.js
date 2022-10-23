@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 
 export const ModalJoinChannel = ({ 
-  setIsOpenJoinChannel, channelInfo, user, socket
+  toggleModal, channelInfo, user, socket
 }) => {
   async function sendChannelName(channelInfo, user){
     try {
@@ -17,7 +17,7 @@ export const ModalJoinChannel = ({
       channelInfo,
       user
     })
-    setIsOpenJoinChannel(prev => !prev)
+    toggleModal('joinChannel')
   }
   return (
     <div className='modal-shadow-bg'>
@@ -25,7 +25,7 @@ export const ModalJoinChannel = ({
         <h3>Deseas unirte a este canal?</h3>
         <div className='modal-btns flex'>
           <button onClick={()=> sendChannelName(channelInfo, user)}>Unirme</button>
-          <button onClick={()=> setIsOpenJoinChannel(prev => !prev)}>Cancelar</button>
+          <button onClick={()=> toggleModal('joinChannel')}>Cancelar</button>
         </div>
       </div>
     </div>

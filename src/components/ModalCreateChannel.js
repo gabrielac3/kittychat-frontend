@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ModalCreateChannel = ({ setIsOpen, setNewChannel }) => {
+export const ModalCreateChannel = ({ toggleModal, setNewChannel }) => {
   const user = JSON.parse(sessionStorage.getItem('userName'))
   const addChannel = () => {
     return fetch('http://localhost:3100/addChannel', {
@@ -46,7 +46,7 @@ export const ModalCreateChannel = ({ setIsOpen, setNewChannel }) => {
       setNewChannel(formData.nameChannel)
     } 
     else console.log('user unidentified');
-    setIsOpen(false);
+    toggleModal('createChannel');
   }
   
   return (
@@ -69,7 +69,7 @@ export const ModalCreateChannel = ({ setIsOpen, setNewChannel }) => {
         ></textarea>
         <div className='modal-btns flex'>
           <button type='submit' onClick={createChannel}>Crear canal</button>
-          <button onClick={() => setIsOpen(false)}>Cancelar</button>
+          <button onClick={() => toggleModal('createChannel')}>Cancelar</button>
         </div>
       </form>
     </div>
