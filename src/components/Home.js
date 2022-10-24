@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { ChatAside } from './ChatAside'
 import { ChatBody } from './ChatBody'
 import { ChatFooter } from './ChatFooter'
@@ -6,8 +6,21 @@ import { ProfileAside } from './ProfileAside'
 
 export const Home = ({ socket, user }) => {
   const [messages, setMessages] = useState([])
+  const [avatarChange, setAvatarChange] = useState([])
   const [channelInfo, setChannelInfo] = useState({ name_channel:'Canal General',
   description:'Canal General' });
+  //modals
+  const [isOpen, setIsOpen] = useState({
+    joinChannel: false,
+    createChannel: false,
+    chooseAvatar: false,
+    channelOptions: false
+  });
+
+  const toggleModal = modal => {
+    setIsOpen({...isOpen, [modal]: !isOpen[modal]})
+  }
+
   useEffect(()=> {
     socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
     socket.on("general room", msgInfo => setMessages([...messages, msgInfo]))
@@ -15,12 +28,16 @@ export const Home = ({ socket, user }) => {
   useEffect(()=> {
     console.log('messages body', messages);
   }, [messages])
-/* -----------TESTING SOCKETS---------- */
 
+console.log(user, user.uid === channelInfo.uid)
   return (
     <div className='home'>
         <section className='profile-aside'>
-          <ProfileAside setChannelInfo = {setChannelInfo} socket={socket} user={user}/>
+          <ProfileAside 
+            setChannelInfo = {setChannelInfo} socket={socket} user={user}
+            setAvatarChange = {setAvatarChange} avatarChange = {avatarChange}
+            toggleModal = {toggleModal} isOpen = { isOpen }
+          />
         </section>
 
         <section className='main'>
@@ -29,9 +46,14 @@ export const Home = ({ socket, user }) => {
             <h3>{channelInfo ? channelInfo.name_channel : 'general Channel'}</h3>
               <p>{channelInfo ? channelInfo.description : 'Grupo para desarrollar...'}</p>
             </div>
+            {user.uid === channelInfo.uid &&
             <div>
-              <i className="fa-solid fa-ellipsis-vertical"></i>
-            </div>
+              <i className="fa-solid fa-ellipsis-vertical" onClick={()=> toggleModal('channelOptions')}></i>
+              {isOpen.channelOptions && <div>
+                <p>Editar</p>
+                <p>Eliminar</p>
+              </div>}
+            </div>}
           </div>
 
           <ChatBody messages={messages} channelInfo = {channelInfo}/>
@@ -40,7 +62,7 @@ export const Home = ({ socket, user }) => {
         </section>
 
         <section className='users-aside'>
-          <ChatAside socket={socket}/>
+          <ChatAside socket={socket} avatarChange = {avatarChange}/>
         </section>
     </div>
   )

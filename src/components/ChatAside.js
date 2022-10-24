@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef }from 'react';
 import axios from 'axios';
 
-export const ChatAside = ({socket}) => {
+export const ChatAside = ({socket, avatarChange}) => {
   const [users, setUsers] = useState([]);
   const [users1, setUsers1] = useState([]);
   const [userAdded, setUserAdded] = useState('');
@@ -28,7 +28,7 @@ export const ChatAside = ({socket}) => {
   useEffect(() => {
     fetchDataUser();
     console.log('acaso soy un bucle?')
-  }, [userAdded]);
+  }, [userAdded, avatarChange]);
 
    // const usersFromDB = users.map(user =>
   //   (<div className='user' key={user.uid}>     

@@ -383,6 +383,8 @@ select {
   background: #F3F3F3;
   border-left: 1px solid #433574;
   padding: 0 .5rem;
+
+  overflow-y: scroll;
 }
 
 .users-title {

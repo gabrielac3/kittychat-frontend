@@ -2,20 +2,20 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 
 export const ModalJoinChannel = ({ 
-  toggleModal, channelInfo, user, socket
+  toggleModal, channelInfo, userSession, socket
 }) => {
-  async function sendChannelName(channelInfo, user){
+  async function sendChannelName(channelInfo, userSession){
     try {
       await axios.post('http://localhost:3100/addUserToChannel', {
         cid: channelInfo.cid,
-        uid: user.uid
+        uid: userSession.uid
       });
     } catch (error) {
       console.error(error.message);
     }
     socket.emit("joinChannel", {
       channelInfo,
-      user
+      userSession
     })
     toggleModal('joinChannel')
   }
@@ -24,7 +24,7 @@ export const ModalJoinChannel = ({
       <div className='modal m-join-to-channel'>
         <h3>Deseas unirte a este canal?</h3>
         <div className='modal-btns flex'>
-          <button onClick={()=> sendChannelName(channelInfo, user)}>Unirme</button>
+          <button onClick={()=> sendChannelName(channelInfo, userSession)}>Unirme</button>
           <button onClick={()=> toggleModal('joinChannel')}>Cancelar</button>
         </div>
       </div>

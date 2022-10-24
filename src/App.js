@@ -3,24 +3,29 @@ import { Welcome } from './components/Welcome';
 import {Routes, Route } from "react-router-dom";
 import { Home } from './components/Home';
 import io from 'socket.io-client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const socket = io("http://localhost:3300/");
 
 function App() {
   
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState('');
 
   socket.on('connect', () => {
-    let user = JSON.parse(sessionStorage.getItem('userName'));
-    if (user !== null){
-      setUser(user.user_name);
+    let userData = JSON.parse(sessionStorage.getItem('userName'));
+    console.log('me connecto ahora')
+    if (userData !== null){
+      setUser(userData);
       socket.emit("reconnect", {
-        email: user.email,
+        email: userData.email,
         socketID: socket.id
       })
     }
   });
+
+  useEffect(()=>{
+    console.log(user)
+  }, [user])
 
   return (
       <div className='app'>

@@ -18,15 +18,18 @@ const avatarProps = [
   }
 ]
 
-export const ModalChooseAvatar = ({toggleModal, user}) => {
+export const ModalChooseAvatar = ({
+  toggleModal, userSession, setAvatar, setAvatarChange
+}) => {
   async function changeAvatar(avatar) {
     console.log(avatar, 'avat')
     try {
       const response = await axios.post('http://localhost:3100/updateUserImg', {
-        email: user.email,
+        email: userSession.email,
         avatarSrc: avatar.src
       });
-      // props.setChannelInfo(response.data.message);
+      // setAvatar(avatar.src)
+      setAvatarChange(avatar.src)
       toggleModal('chooseAvatar')
     } catch (error) {
       console.error(error.message);
