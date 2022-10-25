@@ -25,7 +25,7 @@ export const ProfileAside = (props) => {
       }
     }    
     fetchDataUser();
-  }, [newChannel]);
+  }, [newChannel, props.channelInfo]);
 
   const getChannelInfo = async(channel) => {
     props.toggleModal('joinChannel')
@@ -62,7 +62,6 @@ export const ProfileAside = (props) => {
           <img src={props.avatarChange ?
             props.avatarChange : (userSession.image || props.user.image)
           } alt="profile-img" />
-
           <span onClick={() => props.toggleModal('chooseAvatar')}>+</span>
         </div>
         <p>{typeof(props.user) === 'string' ? 

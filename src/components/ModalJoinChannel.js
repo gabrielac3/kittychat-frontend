@@ -22,7 +22,7 @@ export const ModalJoinChannel = ({
   return (
     <div className='modal-shadow-bg'>
       <div className='modal m-join-to-channel'>
-        <h3>Deseas unirte a este canal?</h3>
+        <h3>¿Deseas unirte a este canal?</h3>
         <div className='modal-btns flex'>
           <button onClick={()=> sendChannelName(channelInfo, userSession)}>Unirme</button>
           <button onClick={()=> toggleModal('joinChannel')}>Cancelar</button>
