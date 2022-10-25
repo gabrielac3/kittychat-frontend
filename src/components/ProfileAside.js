@@ -59,9 +59,10 @@ export const ProfileAside = (props) => {
       </div>
       <div className="profile">
         <div>
-          <img src={typeof(props.user) === 'string' ?
-            userSession.image : props.user.image
+          <img src={props.avatarChange ?
+            props.avatarChange : (userSession.image || props.user.image)
           } alt="profile-img" />
+
           <span onClick={() => props.toggleModal('chooseAvatar')}>+</span>
         </div>
         <p>{typeof(props.user) === 'string' ? 
