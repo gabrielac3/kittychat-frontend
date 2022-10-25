@@ -73,6 +73,7 @@ select {
 }
 
 .flex { display: flex; }
+.cursor-btn { cursor: pointer; }
 
 .welcome-main {
   display: flex;
@@ -181,7 +182,7 @@ select {
   font-weight: 500;
 }
 
-.profile div {
+.profile div, .m-choose-avatars div {
   width: 30%;
   margin: 0 auto .5rem auto;
 }
@@ -211,7 +212,7 @@ select {
 }
 
 .channels {
-  max-height: 50%;
+  margin-bottom: 0;
   overflow-y: scroll;
 }
 
@@ -228,6 +229,11 @@ select {
 
 .channels-title .fa-cat { margin-left: .4em; }
 
+.channels-info {
+  flex-direction: column;
+  max-height: 42%;
+ }
+ 
 .aside-profile--channel {
   gap: 1rem;
   margin-bottom: .8rem;
@@ -241,6 +247,14 @@ select {
 }
 
 .aside-profile--channel li { font-weight: 500;}
+
+.logOut {
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+ } 
+
+.logOut i { margin-left: .4em;}
 
 /* scroll bar */
 .channels::-webkit-scrollbar {
@@ -283,6 +297,13 @@ select {
   height: 15px;
 }
 
+.react-input-emoji--container {
+  border-radius: 21px;
+  border-color: #CB7BB7 !important;
+  font-size: 15px;
+  font-family: sans-serif;
+ } 
+
 .react-input-emoji--input {
   border-radius: 1rem;
   width: 90%;
@@ -293,6 +314,10 @@ select {
   padding: .2rem 1rem !important;
 }
 
+.react-input-emoji--container:active {
+  border-color: #c3c2c6 !important;
+}
+
 .react-input-emoji--button svg {
   fill: #CB7BB7 !important;
 }
@@ -300,18 +325,6 @@ select {
 .react-input-emoji--button {
   position: relative;
   display: flex !important;
-  align-self: center;
-  text-align: center;
-  padding: 0 10px;
-  overflow: hidden;
-  transition: color 0.1s ease-out;
-  margin: 0;
-  box-shadow: none;
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  flex-shrink: 0;
 }
 
 .main {
@@ -370,6 +383,8 @@ select {
   background: #F3F3F3;
   border-left: 1px solid #433574;
   padding: 0 .5rem;
+
+  overflow-y: scroll;
 }
 
 .users-title {

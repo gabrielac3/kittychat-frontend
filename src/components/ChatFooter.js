@@ -5,8 +5,8 @@ export const ChatFooter = ({ socket, channelInfo }) => {
   const [message, setMessage] = useState('')
   const [text, setText] = useState("");
   
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
+  const handleSendMessage = async () => {
+    // e.preventDefault();
     const user = JSON.parse(sessionStorage.getItem('userName'))
     console.log(channelInfo.name_channel);
     if(message.trim() && sessionStorage.getItem('userName')) {
@@ -31,10 +31,6 @@ export const ChatFooter = ({ socket, channelInfo }) => {
     }
     setMessage('');
   }
-  function handleOnEnter(text) {
-    console.log("enter", text);
-  }
-
 
   return (
     <form className='chat-message' onSubmit={handleSendMessage}>
@@ -46,7 +42,7 @@ export const ChatFooter = ({ socket, channelInfo }) => {
       onEnter={handleSendMessage}
       
     />
-      <button>
+      <button className='cursor-btn'>
         <i className="fa-solid fa-paper-plane"></i>
       </button>
     </form>

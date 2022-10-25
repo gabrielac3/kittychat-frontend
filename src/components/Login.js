@@ -68,7 +68,8 @@ export const Login = (props) => {
         'email':formData.email, 
         'uid': userRow.message.uid,
         'user_name':userRow.message.user_name,
-        'token': token 
+        'token': token,
+        'image': userRow.message.avatar
       }));
 
       props.socket.emit("newUser", {
