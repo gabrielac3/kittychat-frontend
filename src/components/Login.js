@@ -88,30 +88,45 @@ export const Login = (props) => {
   }
 
   return (
-    <div className='login'>
-      <form className='form' onSubmit={handleSubmit}>
-        <p className='login-greeting'>Welcome Back</p>
-        <h1 className='login-greeting'>Login to your account</h1>
-        <label>Email</label>
-        <input 
-          type='email'
-          name='email'
-          value={formData.email}
-          onChange={handleChange}
-          ></input>
-        <label>Password</label>
-        <input 
-          type='password'
-          name='password'
-          value={formData.password}
-          onChange={handleChange}
-          ></input>
-        <button type='submit'>Login now</button>
-      </form>
+    <div className='welcome-main'>
+      <div className='mountain'>
+        <img src='../image/mountain.jpg' alt='background' />
+      </div>
+      <div className='halfPurple'>
+        <div className='logo-container'>
+          <img src='../image/logoCat.png' className="img-logo" alt='logo-cat' />
+        </div>
+        <div className='login'>
+        <form className='form' onSubmit={handleSubmit}>
+          <p className='login-greeting'>Welcome Back</p>
+          <h1 className='login-greeting'>Login to your account</h1>
+          <label>Email</label>
+          <input 
+            type='email'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+            ></input>
+          <label>Password</label>
+          <input 
+            type='password'
+            name='password'
+            value={formData.password}
+            onChange={handleChange}
+            ></input>
+          <button type='submit'>Login now</button>
+        </form>
       <p>Dont have an account?
         <Link to='/register' className='anchor'>Join today</Link>
       </p>
-
+    </div>
+      </div>
+      {
+        props.errorMsg &&
+        <div className='welcome-modal-error' ref={props.errorModal}>
+          <p className='error'>{props.errorMsg}</p>
+        </div>
+      }
     </div>
   )
 }

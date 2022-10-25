@@ -6,9 +6,11 @@ import { ProfileAside } from './ProfileAside'
 
 export const Home = ({ socket, user }) => {
   const [messages, setMessages] = useState([])
-  const [avatarChange, setAvatarChange] = useState([])
+  const [avatarChange, setAvatarChange] = useState('')
   const [channelInfo, setChannelInfo] = useState({ name_channel:'Canal General',
   description:'Canal General' });
+
+  const userSession = JSON.parse(sessionStorage.getItem('userName'));
   //modals
   const [isOpen, setIsOpen] = useState({
     joinChannel: false,
@@ -29,7 +31,8 @@ export const Home = ({ socket, user }) => {
     console.log('messages body', messages);
   }, [messages])
 
-console.log(user, user.uid === channelInfo.uid)
+console.log(user,  userSession.uid === channelInfo.uid)
+console.log(user, userSession)
   return (
     <div className='home'>
         <section className='profile-aside'>
@@ -46,7 +49,7 @@ console.log(user, user.uid === channelInfo.uid)
             <h3>{channelInfo ? channelInfo.name_channel : 'general Channel'}</h3>
               <p>{channelInfo ? channelInfo.description : 'Grupo para desarrollar...'}</p>
             </div>
-            {user.uid === channelInfo.uid &&
+            { userSession.uid === channelInfo.uid &&
             <div>
               <i className="fa-solid fa-ellipsis-vertical" onClick={()=> toggleModal('channelOptions')}></i>
               {isOpen.channelOptions && <div>
