@@ -40,7 +40,8 @@ export const ChatAside = ({socket, avatarChange}) => {
     <>
     <div className='users-title'>
       <i className="fa-solid fa-users"></i>
-      <h3>Usuarios ({users.length})</h3>
+      <h3>Usuarios 
+      ({users1.current ? (users1.current === 1? users.length: users1[users1.current].length): users.length})</h3>
     </div>
     <div className='users-cards'>
       { users1.current ? ( users1.current === 1 &&
@@ -62,10 +63,10 @@ export const ChatAside = ({socket, avatarChange}) => {
       {users1[users1.current] && users1.current !== 1 &&
         users1[users1.current].map((user) =>
         <div className='user' key={user.uid}> 
+          <img src={user.image} alt='userImage'/> 
           <p>{user.user_name}</p>
         </div>
       )}
-      <p>{JSON.stringify(users1)}</p>
     </div>
   </>
   )

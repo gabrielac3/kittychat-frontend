@@ -69,7 +69,8 @@ export const Login = (props) => {
         'uid': userRow.message.uid,
         'user_name':userRow.message.user_name,
         'token': token,
-        'image': userRow.message.avatar
+        'image': userRow.message.avatar,
+        'color': userRow.message.color
       }));
 
       props.socket.emit("newUser", {

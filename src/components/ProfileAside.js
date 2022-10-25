@@ -4,6 +4,7 @@ import { ModalCreateChannel } from './ModalCreateChannel';
 import { ModalJoinChannel } from './ModalJoinChannel';
 import { useNavigate } from "react-router-dom";
 import { ModalChooseAvatar } from './ModalChooseAvatar';
+import { ModalChooseColor } from './ModalChooseColor';
 
 export const ProfileAside = (props) => {
   console.log(props.user)
@@ -63,6 +64,7 @@ export const ProfileAside = (props) => {
             props.avatarChange : (userSession.image || props.user.image)
           } alt="profile-img" />
           <span onClick={() => props.toggleModal('chooseAvatar')}>+</span>
+          <span onClick={() => props.toggleModal('chooseColor')}>Colors</span>
         </div>
         <p>{typeof(props.user) === 'string' ? 
           userSession.user_name: props.user.user_name}
@@ -70,6 +72,14 @@ export const ProfileAside = (props) => {
       </div>
       {props.isOpen.chooseAvatar && 
       <ModalChooseAvatar 
+        toggleModal={props.toggleModal}
+        userSession = { userSession } 
+        setAvatarChange = {props.setAvatarChange}
+        avatarChange = {props.avatarChange}
+      />}
+
+      {props.isOpen.chooseColor && 
+      <ModalChooseColor
         toggleModal={props.toggleModal}
         userSession = { userSession } 
         setAvatarChange = {props.setAvatarChange}

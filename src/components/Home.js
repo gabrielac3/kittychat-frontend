@@ -20,7 +20,8 @@ export const Home = ({ socket, user }) => {
     chooseAvatar: false,
     channelOptions: false,
     editChannel: false,
-    deleteChannel: false
+    deleteChannel: false,
+    chooseColor: false
   });
 
   const toggleModal = modal => {
@@ -34,6 +35,11 @@ export const Home = ({ socket, user }) => {
   useEffect(()=> {
     console.log('messages body', messages);
   }, [messages])
+
+  const showHideModal = (modal) => {
+    toggleModal(modal);
+    toggleModal('channelOptions');
+  }
 
 console.log(user,  userSession.uid === channelInfo.uid)
 console.log(user, userSession)
