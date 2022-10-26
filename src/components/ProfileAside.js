@@ -29,7 +29,7 @@ export const ProfileAside = (props) => {
   }, [newChannel, props.channelInfo]);
 
   const getChannelInfo = async(channel) => {
-    props.toggleModal('joinChannel')
+    props.toggleModal(['joinChannel'])
     setJoinChannelData(channel)
     try {
       const response = await axios.post('http://localhost:3100/channelByName', {
@@ -63,8 +63,8 @@ export const ProfileAside = (props) => {
           <img src={props.avatarChange ?
             props.avatarChange : (userSession.image || props.user.image)
           } alt="profile-img" />
-          <span onClick={() => props.toggleModal('chooseAvatar')}>+</span>
-          <span onClick={() => props.toggleModal('chooseColor')}>Colors</span>
+          <span onClick={() => props.toggleModal(['chooseAvatar'])}>+</span>
+          <span onClick={() => props.toggleModal(['chooseColor'])}>Colors</span>
         </div>
         <p>{typeof(props.user) === 'string' ? 
           userSession.user_name: props.user.user_name}
@@ -86,7 +86,7 @@ export const ProfileAside = (props) => {
         avatarChange = {props.avatarChange}
       />}
 
-      <button onClick={() => props.toggleModal('createChannel')} className='cursor-btn'>Crear canal</button>
+      <button onClick={() => props.toggleModal(['createChannel'])} className='cursor-btn'>Crear canal</button>
       {props.isOpen.createChannel && 
       <ModalCreateChannel 
         toggleModal={props.toggleModal} 

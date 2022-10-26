@@ -28,7 +28,7 @@ export const ModalChooseColor = (props) => {
           });
           // setAvatar(avatar.src)
 /*           setAvatarChange(avatar.src) */
-          props.toggleModal('chooseColor')
+          props.toggleModal(['chooseColor'])
         } catch (error) {
           console.error(error.message);
         }
@@ -47,7 +47,7 @@ export const ModalChooseColor = (props) => {
         </div>
         <div className='modal-btns flex'>
           <button>Confirmar</button>
-          <button onClick={()=> props.toggleModal('chooseColor')}>Cancelar</button>
+          <button onClick={()=> props.toggleModal(['chooseColor'])}>Cancelar</button>
         </div>
       </div>
     </div>

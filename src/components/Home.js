@@ -24,8 +24,12 @@ export const Home = ({ socket, user }) => {
     chooseColor: false
   });
 
-  const toggleModal = modal => {
-    setIsOpen({...isOpen, [modal]: !isOpen[modal]})
+  const toggleModal = modals => {
+    const toggles = modals.reduce((memo, value) => {
+      memo[value]= !memo[value];
+      return memo
+    },{...isOpen} )
+    setIsOpen(toggles);
   }
 
   useEffect(()=> {
@@ -38,7 +42,7 @@ export const Home = ({ socket, user }) => {
 
   const showHideModal = (modal) => {
     toggleModal(modal);
-    toggleModal('channelOptions');
+    toggleModal(['channelOptions']);
   }
 
 console.log(user,  userSession.uid === channelInfo.uid)
@@ -62,9 +66,9 @@ console.log(user, userSession)
             </div>
             { userSession.uid === channelInfo.uid &&
             <div>
-              <i className="fa-solid fa-ellipsis-vertical" onClick={()=> toggleModal('channelOptions')}></i>
+              <i className="fa-solid fa-ellipsis-vertical" onClick={()=> toggleModal(['channelOptions'])}></i>
               {isOpen.channelOptions && <div>
-                <p onClick={()=> toggleModal('editChannel')}>Editar</p>
+                <p onClick={()=> toggleModal(['editChannel'])}>Editar</p>
                 {isOpen.editChannel && 
                 <ModalEditChannel 
                   toggleModal={toggleModal} 
@@ -72,7 +76,7 @@ console.log(user, userSession)
                   channelInfo = {channelInfo}
                 />}
 
-                <p onClick={()=> toggleModal('deleteChannel')}>Eliminar</p>
+                <p onClick={()=> toggleModal(['deleteChannel'])}>Eliminar</p>
                 {isOpen.deleteChannel && 
                 <ModalDeleteChannel
                   toggleModal={toggleModal} 

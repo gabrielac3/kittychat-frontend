@@ -29,7 +29,7 @@ export const ModalEditChannel = (props) => {
         } catch (error) {
             console.error(error.message);
         }
-        props.toggleModal('editChannel');
+        props.toggleModal(['editChannel']);
         }
 
     const [formData, setFormData] = React.useState(
@@ -66,7 +66,7 @@ export const ModalEditChannel = (props) => {
       ></textarea>
       <div className='modal-btns flex'>
         <button type='submit' onClick={(e) => changeChannel(e)}>Editar canal</button>
-        <button onClick={() => props.toggleModal('editChannel')}>Cancelar</button>
+        <button onClick={() => props.toggleModal(['editChannel', 'channelOptions'])}>Cancelar</button>
       </div>
     </form>
   </div>
