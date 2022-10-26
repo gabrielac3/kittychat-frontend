@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 
 export const ModalJoinChannel = ({ 
-  toggleModal, channelInfo, userSession, socket
+  toggleModal, channelInfo, userSession, socket, currentChannel
 }) => {
   async function sendChannelName(channelInfo, userSession){
     try {
@@ -13,6 +13,12 @@ export const ModalJoinChannel = ({
     } catch (error) {
       console.error(error.message);
     }
+    console.log(currentChannel);
+    socket.emit("leaveChannel", {
+      currentChannel,
+      userSession
+    })
+
     socket.emit("joinChannel", {
       channelInfo,
       userSession

@@ -103,6 +103,7 @@ export const ProfileAside = (props) => {
         <ModalJoinChannel 
           toggleModal={ props.toggleModal }
           channelInfo = { joinChannelData }
+          currentChannel = { props.channelInfo }
           userSession = { userSession }
           socket = { props.socket }
         />}
