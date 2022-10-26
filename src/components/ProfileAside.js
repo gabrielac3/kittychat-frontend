@@ -31,7 +31,7 @@ export const ProfileAside = (props) => {
   const getChannelInfo = async(channel) => {
     props.toggleModal('joinChannel')
     setJoinChannelData(channel)
-    try {
+/*     try {
       const response = await axios.post('http://localhost:3100/channelByName', {
         channelName: channel.name_channel
       });
@@ -39,7 +39,7 @@ export const ProfileAside = (props) => {
       props.setChannelInfo(response.data.message);
     } catch (error) {
       console.error(error.message);
-    }
+    } */
   }      
 
   // const joinChannel = (event) => {
@@ -107,6 +107,7 @@ export const ProfileAside = (props) => {
           currentChannel = { props.channelInfo }
           userSession = { userSession }
           socket = { props.socket }
+          setChannelInfo = {props.setChannelInfo}
         />}
         <ul className="channels">
           { channels.map((channel) => 
