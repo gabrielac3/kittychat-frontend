@@ -84,6 +84,7 @@ export const ProfileAside = (props) => {
         userSession = { userSession } 
         setAvatarChange = {props.setAvatarChange}
         avatarChange = {props.avatarChange}
+        setColor = {props.setColor}
       />}
 
       <button onClick={() => props.toggleModal('createChannel')} className='cursor-btn'>Crear canal</button>

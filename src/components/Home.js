@@ -11,8 +11,9 @@ export const Home = ({ socket, user }) => {
   const [avatarChange, setAvatarChange] = useState('')
   const [channelInfo, setChannelInfo] = useState({ name_channel:'Canal General',
   description:'Canal General' });
-
+  const [color, setColor] = useState('#CB7BB7')
   const userSession = JSON.parse(sessionStorage.getItem('userName'));
+
   //modals
   const [isOpen, setIsOpen] = useState({
     joinChannel: false,
@@ -50,7 +51,7 @@ console.log(user, userSession)
             setChannelInfo = {setChannelInfo} socket={socket} user={user}
             setAvatarChange = {setAvatarChange} avatarChange = {avatarChange}
             toggleModal = {toggleModal} isOpen = { isOpen }
-            channelInfo = {channelInfo}
+            channelInfo = {channelInfo} setColor = {setColor}
           />
         </section>
 
@@ -83,7 +84,7 @@ console.log(user, userSession)
             </div>}
           </div>
 
-          <ChatBody messages={messages} channelInfo = {channelInfo}/>
+          <ChatBody messages={messages} channelInfo = {channelInfo} color = {color}/>
 
           <ChatFooter socket={socket} channelInfo = {channelInfo} />
         </section>

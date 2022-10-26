@@ -28,6 +28,7 @@ export const ModalChooseColor = (props) => {
           });
           // setAvatar(avatar.src)
 /*           setAvatarChange(avatar.src) */
+          props.setColor(avatar.color)
           props.toggleModal('chooseColor')
         } catch (error) {
           console.error(error.message);

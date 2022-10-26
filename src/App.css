@@ -366,7 +366,7 @@ select {
 }
 
 .msg-recipient {
-  background-color: #CB7BB7;
+  /* background-color: #CB7BB7; */
   max-width: 45%;
   padding: .5em;
   border-radius: .5em;
@@ -375,6 +375,7 @@ select {
 
 .sender-msg {margin-left: auto;}
 .receptor-msg {margin-right: auto;}
+.c-646FD0 {background-color: #646FD0;}
 
 /* ----1.3. users aside----- */
 .users-aside {
