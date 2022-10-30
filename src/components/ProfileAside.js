@@ -63,8 +63,12 @@ export const ProfileAside = (props) => {
           <img src={props.avatarChange ?
             props.avatarChange : (userSession.image || props.user.image)
           } alt="profile-img" />
-          <span onClick={() => props.toggleModal('chooseAvatar')}>+</span>
-          <span onClick={() => props.toggleModal('chooseColor')}>Colors</span>
+          <span className='bg-circular pos-circular-right' onClick={() => props.toggleModal('chooseAvatar')}>
+            <i className="fa-solid fa-camera-retro"></i>
+          </span>
+          <span className='bg-circular pos-circular-left' onClick={() => props.toggleModal('chooseColor')}>
+            <i className="fa-solid fa-palette"></i>
+          </span>
         </div>
         <p>{typeof(props.user) === 'string' ? 
           userSession.user_name: props.user.user_name}

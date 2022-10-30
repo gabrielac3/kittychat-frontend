@@ -19,7 +19,7 @@ export const ModalJoinChannel = ({
       channelInfo,
       userSession
     })
-    
+      
     socket.emit("leaveChannel", {
       currentChannel,
       userSession

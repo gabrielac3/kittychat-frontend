@@ -5,10 +5,7 @@ export const ChatAside = ({socket, avatarChange}) => {
   const [users, setUsers] = useState([]);
   const [users1, setUsers1] = useState([]);
   const [userAdded, setUserAdded] = useState('');
-  
-  useEffect(() => {
-    console.log('🟡: user from my room',users1)
-  }, [users1]);
+ 
   useEffect(()=> {
     socket.on("user registered", isUserAdded => setUserAdded(isUserAdded))
     socket.on("newUserResponse", fetchDataUser);
@@ -19,7 +16,6 @@ export const ChatAside = ({socket, avatarChange}) => {
     try {
       const response = await axios.get('http://localhost:3100/users');
       setUsers(response.data);
-      console.log(response.data.length)
     } catch (error) {
       console.error(error.message);
     }
@@ -27,14 +23,7 @@ export const ChatAside = ({socket, avatarChange}) => {
 
   useEffect(() => {
     fetchDataUser();
-    console.log('acaso soy un bucle?')
-  }, [userAdded, avatarChange]);
-
-   // const usersFromDB = users.map(user =>
-  //   (<div className='user' key={user.uid}>     
-  //     <p>{user.user_name}</p>
-  //     <p>{user.status? 'En línea': 'Desconectado'}</p>
-  //   </div>))
+  }, [userAdded, avatarChange, users1]);
 
   return (
     <>
@@ -48,15 +37,19 @@ export const ChatAside = ({socket, avatarChange}) => {
         users.map(user =>
         <div className='user' key={user.uid}>
           <img src={user.avatar} alt='userImage'/>     
-          <p>{user.user_name}</p>
-          <p>{user.status? 'En línea': 'Desconectado'}</p>
+          <div className='user-info flex'>
+            <p>{user.user_name}</p>
+            <p>{user.status? 'En línea': 'Desconectado'}</p>
+          </div>
         </div>)
         ) : (
           users.map(user =>
           <div className='user' key={user.uid}>
-            <img src={user.avatar} alt='userImage'/>     
-            <p>{user.user_name}</p>
-            <p>{user.status? 'En línea': 'Desconectado'}</p>
+            <img src={user.avatar} alt='userImage'/>   
+            <div className='user-info flex'>  
+              <p>{user.user_name}</p>
+              <p>{user.status? 'En línea': 'Desconectado'}</p>
+            </div>
           </div>
         )
       )}

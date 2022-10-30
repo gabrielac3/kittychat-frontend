@@ -3,18 +3,35 @@ import React from 'react'
 const avatarProps = [
   {
     id: 'av1',
-    src: 'https://www.pngitem.com/pimgs/m/518-5182033_streamlabs-chatbot-hd-png-download.png',
-    color: "#646FD0"
+    src: 'https://i.imgur.com/91BcdRJ.jpg',
   },
   {
     id: 'av2',
-    src: 'https://img2.freepng.es/20180324/cue/kisspng-open-broadcaster-software-streaming-media-streamla-donate-5ab66113098343.960710561521901843039.jpg',
-    color: "#245CAC"
+    src: 'https://i.imgur.com/eHVDQJH.jpg',
   },
   {
     id: 'av3',
-    src: 'https://img2.freepng.es/20180719/lpy/kisspng-streamlabs-mixer-streaming-media-open-broadcaster-avatar-discord-5b514c143c3f67.4769472415320545482468.jpg',
-    color: "#549DCF"
+    src: 'https://i.imgur.com/uxTzXMr.jpg',
+  },
+  {
+    id: 'av4',
+    src: 'https://i.imgur.com/oXaamAE.jpg',
+  },
+  {
+    id: 'av5',
+    src: 'https://i.imgur.com/h18KKmo.jpg',
+  },
+  {
+    id: 'av6',
+    src: 'https://i.imgur.com/Qn7xOCc.jpg',
+  },
+  {
+    id: 'av7',
+    src: 'https://i.imgur.com/lY8Xxq3.jpg',
+  },
+  {
+    id: 'av8',
+    src: 'https://i.imgur.com/MbwR2UV.jpg',
   }
 ]
 
@@ -39,7 +56,7 @@ export const ModalChooseAvatar = ({
     <div className='modal-shadow-bg'>
       <div className='modal m-join-to-channel'>
         <h3>Escoge tu avatar</h3>
-        <div className='m-choose-avatars flex'>
+        <div className='m-choose-avatars'>
           {avatarProps.map(avatar => 
             <div key={avatar.id} onClick={()=> changeAvatar(avatar)}>
               <img src={avatar.src}  alt='avatar'/>
