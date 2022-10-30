@@ -31,7 +31,7 @@ export const ProfileAside = (props) => {
   const getChannelInfo = async(channel) => {
     props.toggleModal(['joinChannel'])
     setJoinChannelData(channel)
-    try {
+/*     try {
       const response = await axios.post('http://localhost:3100/channelByName', {
         channelName: channel.name_channel
       });
@@ -39,7 +39,7 @@ export const ProfileAside = (props) => {
       props.setChannelInfo(response.data.message);
     } catch (error) {
       console.error(error.message);
-    }
+    } */
   }      
 
   // const joinChannel = (event) => {
@@ -63,8 +63,12 @@ export const ProfileAside = (props) => {
           <img src={props.avatarChange ?
             props.avatarChange : (userSession.image || props.user.image)
           } alt="profile-img" />
-          <span onClick={() => props.toggleModal(['chooseAvatar'])}>+</span>
-          <span onClick={() => props.toggleModal(['chooseColor'])}>Colors</span>
+          <span className='bg-circular pos-circular-right' onClick={() => props.toggleModal('chooseAvatar')}>
+            <i className="fa-solid fa-camera-retro"></i>
+          </span>
+          <span className='bg-circular pos-circular-left' onClick={() => props.toggleModal('chooseColor')}>
+            <i className="fa-solid fa-palette"></i>
+          </span>
         </div>
         <p>{typeof(props.user) === 'string' ? 
           userSession.user_name: props.user.user_name}
@@ -84,6 +88,7 @@ export const ProfileAside = (props) => {
         userSession = { userSession } 
         setAvatarChange = {props.setAvatarChange}
         avatarChange = {props.avatarChange}
+        setColor = {props.setColor}
       />}
 
       <button onClick={() => props.toggleModal(['createChannel'])} className='cursor-btn'>Crear canal</button>
@@ -106,6 +111,7 @@ export const ProfileAside = (props) => {
           currentChannel = { props.channelInfo }
           userSession = { userSession }
           socket = { props.socket }
+          setChannelInfo = {props.setChannelInfo}
         />}
         <ul className="channels">
           { channels.map((channel) => 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 
 export const ModalJoinChannel = ({ 
-  toggleModal, channelInfo, userSession, socket, currentChannel
+  toggleModal, channelInfo, userSession, socket, currentChannel, setChannelInfo
 }) => {
   async function sendChannelName(channelInfo, userSession){
     try {
@@ -13,18 +13,20 @@ export const ModalJoinChannel = ({
     } catch (error) {
       console.error(error.message);
     }
-    console.log(currentChannel);
-/*     socket.emit("leaveChannel", {
-      currentChannel,
-      userSession
-    }) */
-
+    console.log('both: current, next', currentChannel, channelInfo);
     socket.emit("joinChannel", {
       channelInfo,
       userSession,
       currentChannel
     })
-    toggleModal(['joinChannel'])
+      
+    socket.emit("leaveChannel", {
+      currentChannel,
+      userSession
+    })
+    toggleModal('joinChannel')
+    setChannelInfo(channelInfo);
+    
   }
   return (
     <div className='modal-shadow-bg'>
