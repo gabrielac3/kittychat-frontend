@@ -25,7 +25,7 @@ export const Home = ({ socket, user }) => {
     chooseColor: false
   });
 
-  const toggleModal = modals => {
+  const toggleModal = (modals) => {
     const toggles = modals.reduce((memo, value) => {
       memo[value]= !memo[value];
       return memo

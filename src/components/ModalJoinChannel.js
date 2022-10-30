@@ -24,7 +24,7 @@ export const ModalJoinChannel = ({
       currentChannel,
       userSession
     })
-    toggleModal('joinChannel')
+    toggleModal(['joinChannel'])
     setChannelInfo(channelInfo);
     
   }

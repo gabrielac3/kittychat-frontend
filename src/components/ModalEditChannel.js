@@ -29,7 +29,7 @@ export const ModalEditChannel = (props) => {
         } catch (error) {
             console.error(error.message);
         }
-        props.toggleModal(['editChannel']);
+        props.toggleModal(['editChannel', 'channelOptions']);
         }
 
     const [formData, setFormData] = React.useState(

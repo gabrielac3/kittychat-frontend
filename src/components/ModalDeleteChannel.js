@@ -14,7 +14,7 @@ export const ModalDeleteChannel = (props) => {
             console.error(error.message);
         }
         props.setChannelInfo({});
-        props.toggleModal(['deleteChannel']);
+        props.toggleModal(['deleteChannel','channelOptions']);
         }
 
 
@@ -24,7 +24,7 @@ export const ModalDeleteChannel = (props) => {
         <h3>¿Deseas eliminar este canal?</h3>
         <div className='modal-btns flex'>
           <button type= 'submit' onClick={(e) => deleteChannel(e)}>Eliminar</button>
-          <button onClick={()=> props.toggleModal(['deleteChannel'])}>Cancelar</button>
+          <button onClick={()=> props.toggleModal(['deleteChannel','channelOptions'])}>Cancelar</button>
         </div>
       </div>
     </form>
