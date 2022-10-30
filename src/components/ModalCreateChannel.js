@@ -46,7 +46,7 @@ export const ModalCreateChannel = ({ toggleModal, setNewChannel }) => {
       setNewChannel(formData.nameChannel)
     } 
     else console.log('user unidentified');
-    toggleModal('createChannel');
+    toggleModal(['createChannel']);
   }
   
   return (
@@ -69,7 +69,7 @@ export const ModalCreateChannel = ({ toggleModal, setNewChannel }) => {
         ></textarea>
         <div className='modal-btns flex'>
           <button type='submit' onClick={createChannel}>Crear canal</button>
-          <button onClick={() => toggleModal('createChannel')}>Cancelar</button>
+          <button onClick={() => toggleModal(['createChannel'])}>Cancelar</button>
         </div>
       </form>
     </div>

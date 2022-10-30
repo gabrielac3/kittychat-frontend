@@ -20,16 +20,18 @@ const colorProps = [
 ]
 
 export const ModalChooseColor = (props) => {
-  async function changeColor(color) {
-      try {
-        const response = await axios.post('http://localhost:3100/updateColor', {
-          email: props.userSession.email,
-          avatarColor: color.hexName
-        });
-        props.setColor(color.hexName)
-        props.toggleModal('chooseColor')
-      } catch (error) {
-        console.error(error.message);
+    async function changeColor(avatar) {
+        try {
+          const response = await axios.post('http://localhost:3100/updateColor', {
+            email: props.userSession.email,
+            avatarColor: avatar.color
+          });
+          // setAvatar(avatar.src)
+/*           setAvatarChange(avatar.src) */
+          props.toggleModal(['chooseColor'])
+        } catch (error) {
+          console.error(error.message);
+        }
       }
   }
 

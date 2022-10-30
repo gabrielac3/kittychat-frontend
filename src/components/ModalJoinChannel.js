@@ -14,10 +14,10 @@ export const ModalJoinChannel = ({
       console.error(error.message);
     }
     console.log('both: current, next', currentChannel, channelInfo);
-    
     socket.emit("joinChannel", {
       channelInfo,
-      userSession
+      userSession,
+      currentChannel
     })
       
     socket.emit("leaveChannel", {
@@ -26,6 +26,7 @@ export const ModalJoinChannel = ({
     })
     toggleModal('joinChannel')
     setChannelInfo(channelInfo);
+    
   }
   return (
     <div className='modal-shadow-bg'>
@@ -33,7 +34,7 @@ export const ModalJoinChannel = ({
         <h3>¿Deseas unirte a este canal?</h3>
         <div className='modal-btns flex'>
           <button onClick={()=> sendChannelName(channelInfo, userSession)}>Unirme</button>
-          <button onClick={()=> toggleModal('joinChannel')}>Cancelar</button>
+          <button onClick={()=> toggleModal(['joinChannel'])}>Cancelar</button>
         </div>
       </div>
     </div>

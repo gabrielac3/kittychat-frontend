@@ -47,7 +47,7 @@ export const ModalChooseAvatar = ({
       });
       // setAvatar(avatar.src)
       setAvatarChange(avatar.src)
-      toggleModal('chooseAvatar')
+      toggleModal(['chooseAvatar'])
     } catch (error) {
       console.error(error.message);
     }
@@ -65,7 +65,7 @@ export const ModalChooseAvatar = ({
         </div>
         <div className='modal-btns flex'>
           <button>Confirmar</button>
-          <button onClick={()=> toggleModal('chooseAvatar')}>Cancelar</button>
+          <button onClick={()=> toggleModal(['chooseAvatar'])}>Cancelar</button>
         </div>
       </div>
     </div>
