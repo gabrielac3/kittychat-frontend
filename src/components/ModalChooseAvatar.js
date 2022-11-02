@@ -57,15 +57,14 @@ export const ModalChooseAvatar = ({
       <div className='modal m-join-to-channel'>
         <h3>Escoge tu avatar</h3>
         <div className='m-choose-avatars'>
-          {avatarProps.map(avatar => 
-            <div key={avatar.id} onClick={()=> changeAvatar(avatar)}>
-              <img src={avatar.src}  alt='avatar'/>
+          {avatarProps.map(avatar =>
+            <div key={avatar.id} onClick={() => changeAvatar(avatar)}>
+              <img src={avatar.src} alt='avatar' />
             </div>
           )}
         </div>
         <div className='modal-btns flex'>
-          <button>Confirmar</button>
-          <button onClick={()=> toggleModal(['chooseAvatar'])}>Cancelar</button>
+          <button onClick={() => toggleModal(['chooseAvatar'])}>Cancelar</button>
         </div>
       </div>
     </div>

@@ -24,23 +24,23 @@ export const ProfileAside = (props) => {
       } catch (error) {
         console.error(error.message);
       }
-    }    
+    }
     fetchDataUser();
   }, [newChannel, props.channelInfo]);
 
-  const getChannelInfo = async(channel) => {
+  const getChannelInfo = async (channel) => {
     props.toggleModal(['joinChannel'])
     setJoinChannelData(channel)
-/*     try {
-      const response = await axios.post('http://localhost:3100/channelByName', {
-        channelName: channel.name_channel
-      });
-      console.log(response.data.message);
-      props.setChannelInfo(response.data.message);
-    } catch (error) {
-      console.error(error.message);
-    } */
-  }      
+    /*     try {
+          const response = await axios.post('http://localhost:3100/channelByName', {
+            channelName: channel.name_channel
+          });
+          console.log(response.data.message);
+          props.setChannelInfo(response.data.message);
+        } catch (error) {
+          console.error(error.message);
+        } */
+  }
 
   // const joinChannel = (event) => {
   //   props.socket.emit("joinChannel", event.target.textContent)
@@ -70,33 +70,33 @@ export const ProfileAside = (props) => {
             <i className="fa-solid fa-palette"></i>
           </span>
         </div>
-        <p>{typeof(props.user) === 'string' ? 
-          userSession.user_name: props.user.user_name}
+        <p>{typeof (props.user) === 'string' ?
+          userSession.user_name : props.user.user_name}
         </p>
       </div>
-      {props.isOpen.chooseAvatar && 
-      <ModalChooseAvatar 
-        toggleModal={props.toggleModal}
-        userSession = { userSession } 
-        setAvatarChange = {props.setAvatarChange}
-        avatarChange = {props.avatarChange}
-      />}
+      {props.isOpen.chooseAvatar &&
+        <ModalChooseAvatar
+          toggleModal={props.toggleModal}
+          userSession={userSession}
+          setAvatarChange={props.setAvatarChange}
+          avatarChange={props.avatarChange}
+        />}
 
-      {props.isOpen.chooseColor && 
-      <ModalChooseColor
-        toggleModal={props.toggleModal}
-        userSession = { userSession } 
-        setAvatarChange = {props.setAvatarChange}
-        avatarChange = {props.avatarChange}
-        setColor = {props.setColor}
-      />}
+      {props.isOpen.chooseColor &&
+        <ModalChooseColor
+          toggleModal={props.toggleModal}
+          userSession={userSession}
+          setAvatarChange={props.setAvatarChange}
+          avatarChange={props.avatarChange}
+          setColor={props.setColor}
+        />}
 
       <button onClick={() => props.toggleModal(['createChannel'])} className='cursor-btn'>Crear canal</button>
-      {props.isOpen.createChannel && 
-      <ModalCreateChannel 
-        toggleModal={props.toggleModal} 
-        setNewChannel={setNewChannel} 
-      />}
+      {props.isOpen.createChannel &&
+        <ModalCreateChannel
+          toggleModal={props.toggleModal}
+          setNewChannel={setNewChannel}
+        />}
 
       <div className="channels-info flex">
         <div className="channels-title">
@@ -104,17 +104,17 @@ export const ProfileAside = (props) => {
           <h2>Channels</h2>
         </div>
 
-        {props.isOpen.joinChannel && 
-        <ModalJoinChannel 
-          toggleModal={ props.toggleModal }
-          channelInfo = { joinChannelData }
-          currentChannel = { props.channelInfo }
-          userSession = { userSession }
-          socket = { props.socket }
-          setChannelInfo = {props.setChannelInfo}
-        />}
+        {props.isOpen.joinChannel &&
+          <ModalJoinChannel
+            toggleModal={props.toggleModal}
+            channelInfo={joinChannelData}
+            currentChannel={props.channelInfo}
+            userSession={userSession}
+            socket={props.socket}
+            setChannelInfo={props.setChannelInfo}
+          />}
         <ul className="channels">
-          { channels.map((channel) => 
+          {channels.map((channel) =>
             <div className='aside-profile--channel flex' key={channel.key}>
               <span onClick={() => getChannelInfo(channel)} className='cursor-btn'>
                 <i className="fa-solid fa-user-plus"></i>

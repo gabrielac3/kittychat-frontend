@@ -9,8 +9,10 @@ import { ProfileAside } from './ProfileAside'
 export const Home = ({ socket, user }) => {
   const [messages, setMessages] = useState([])
   const [avatarChange, setAvatarChange] = useState('')
-  const [channelInfo, setChannelInfo] = useState({ name_channel:'Canal General',
-  description:'Canal General' });
+  const [channelInfo, setChannelInfo] = useState({
+    name_channel: 'Canal General',
+    description: 'Canal General'
+  });
   const [color, setColor] = useState('#CB7BB7')
   const userSession = JSON.parse(sessionStorage.getItem('userName'));
 
@@ -27,17 +29,21 @@ export const Home = ({ socket, user }) => {
 
   const toggleModal = (modals) => {
     const toggles = modals.reduce((memo, value) => {
-      memo[value]= !memo[value];
+      memo[value] = !memo[value];
       return memo
-    },{...isOpen} )
+    }, { ...isOpen })
     setIsOpen(toggles);
   }
+  // const toggleModal = modal => {
+  //   setIsOpen({ ...isOpen, [modal]: !isOpen[modal] })
+  // }
 
-  useEffect(()=> {
+
+  useEffect(() => {
     socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
     socket.on("general room", msgInfo => setMessages([...messages, msgInfo]))
   }, [socket, messages])
-  useEffect(()=> {
+  useEffect(() => {
     console.log('messages body', messages);
   }, [messages])
 
@@ -46,56 +52,56 @@ export const Home = ({ socket, user }) => {
     toggleModal(['channelOptions']);
   }
 
-console.log(user,  userSession.uid === channelInfo.uid)
-console.log(user, userSession)
+  console.log(user, userSession.uid === channelInfo.uid)
+  console.log(user, userSession)
   return (
     <div className='home'>
-        <section className='profile-aside'>
-          <ProfileAside 
-            setChannelInfo = {setChannelInfo} socket={socket} user={user}
-            setAvatarChange = {setAvatarChange} avatarChange = {avatarChange}
-            toggleModal = {toggleModal} isOpen = { isOpen }
-            channelInfo = {channelInfo} setColor = {setColor}
-          />
-        </section>
+      <section className='profile-aside'>
+        <ProfileAside
+          setChannelInfo={setChannelInfo} socket={socket} user={user}
+          setAvatarChange={setAvatarChange} avatarChange={avatarChange}
+          toggleModal={toggleModal} isOpen={isOpen}
+          channelInfo={channelInfo} setColor={setColor}
+        />
+      </section>
 
-        <section className='main'>
-          <div className='chat-navbar'>
-            <div>
+      <section className='main'>
+        <div className='chat-navbar'>
+          <div>
             <h3>{channelInfo ? channelInfo.name_channel : 'general Channel'}</h3>
-              <p>{channelInfo ? channelInfo.description : 'Grupo para desarrollar...'}</p>
-            </div>
-            { userSession.uid === channelInfo.uid &&
+            <p>{channelInfo ? channelInfo.description : 'Grupo para desarrollar...'}</p>
+          </div>
+          {userSession.uid === channelInfo.uid &&
             <div>
-              <i className="fa-solid fa-ellipsis-vertical" onClick={()=> toggleModal(['channelOptions'])}></i>
+              <i className="fa-solid fa-ellipsis-vertical" onClick={() => toggleModal(['channelOptions'])}></i>
               {isOpen.channelOptions && <div>
-                <p onClick={()=> toggleModal(['editChannel'])}>Editar</p>
-                {isOpen.editChannel && 
-                <ModalEditChannel 
-                  toggleModal={toggleModal} 
-                  setChannelInfo = {setChannelInfo}
-                  channelInfo = {channelInfo}
-                />}
+                <p onClick={() => toggleModal(['editChannel'])}>Editar</p>
+                {isOpen.editChannel &&
+                  <ModalEditChannel
+                    toggleModal={toggleModal}
+                    setChannelInfo={setChannelInfo}
+                    channelInfo={channelInfo}
+                  />}
 
-                <p onClick={()=> toggleModal(['deleteChannel'])}>Eliminar</p>
-                {isOpen.deleteChannel && 
-                <ModalDeleteChannel
-                  toggleModal={toggleModal} 
-                  setChannelInfo = {setChannelInfo}
-                  channelInfo = {channelInfo}
-                />}
+                <p onClick={() => toggleModal(['deleteChannel'])}>Eliminar</p>
+                {isOpen.deleteChannel &&
+                  <ModalDeleteChannel
+                    toggleModal={toggleModal}
+                    setChannelInfo={setChannelInfo}
+                    channelInfo={channelInfo}
+                  />}
               </div>}
             </div>}
-          </div>
+        </div>
 
-          <ChatBody messages={messages} channelInfo = {channelInfo} color = {color}/>
+        <ChatBody messages={messages} channelInfo={channelInfo} color={color} />
 
-          <ChatFooter socket={socket} channelInfo = {channelInfo} />
-        </section>
+        <ChatFooter socket={socket} channelInfo={channelInfo} />
+      </section>
 
-        <section className='users-aside'>
-          <ChatAside socket={socket} avatarChange = {avatarChange}/>
-        </section>
+      <section className='users-aside'>
+        <ChatAside socket={socket} avatarChange={avatarChange} />
+      </section>
     </div>
   )
 }
