@@ -73,6 +73,7 @@ select {
 }
 
 .flex { display: flex; }
+.cursor-btn { cursor: pointer; }
 
 .welcome-main {
   display: flex;
@@ -166,6 +167,7 @@ select {
 .home {
   display: grid;
   grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 100vh;
   background: #433574;
   color: white;
   height: 100%;
@@ -180,9 +182,24 @@ select {
   font-weight: 500;
 }
 
-.profile div {
+.profile div{
   width: 30%;
-  margin: 0 auto .5rem auto;
+  margin: 0 auto;
+}
+
+.m-choose-avatars {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.m-choose-color {width: 25%;}
+
+.m-choose-avatars div {
+  aspect-ratio: 1;
+}
+.m-choose-avatars img {
+  border-radius: 50%;
 }
 
 .profile-aside {
@@ -191,6 +208,18 @@ select {
   padding: 1.5rem;
   border-right: 1px solid #f3f3f3;
 }
+
+.bg-circular {
+  background: #cb7bb7;
+  padding: .1em .3em;
+  border-radius: 50%;
+  position: relative;
+}
+
+.pos-circular-left, .pos-circular-right {bottom: 1rem;}
+
+.pos-circular-left {left: 1rem;}
+.pos-circular-right {right: 1rem;}
 
 .profile-aside button {
   background: #CB7BB7;
@@ -209,15 +238,68 @@ select {
   max-width: 100%;
 }
 
+.profile img {
+  border-radius: 40%;
+}
+
+.channels {
+  margin-bottom: 0;
+  overflow-y: scroll;
+}
+
+.channels > * + * {
+  margin-top: .7rem;
+}
+
 .channels-title {
   display: flex;
   align-items: center;
   justify-content: safe;
+  gap: 1.4rem;
 } 
 
-.channels-title h2 {
-  margin-left: 1rem;
+.channels-title .fa-cat { margin-left: .4em; }
+
+.channels-info {
+  flex-direction: column;
+  max-height: 42%;
+ }
+ 
+.aside-profile--channel {
+  gap: 1rem;
+  margin-bottom: .8rem;
+  align-items: center;
 }
+
+.aside-profile--channel span {
+  background: #cb7bb7;
+  padding: .2em .3em;
+  border-radius: .4em;
+}
+
+.aside-profile--channel li { font-weight: 500;}
+
+.logOut {
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+ } 
+
+.logOut i { margin-left: .4em;}
+
+/* scroll bar */
+.channels::-webkit-scrollbar {
+  width: .4rem;
+}
+.channels::-webkit-scrollbar-track {
+  background: #f8f3f3;
+}
+.channels::-webkit-scrollbar-thumb {
+  background: #a2adf6;
+}
+.channels::-webkit-scrollbar-thumb:hover {
+  background: #a66b97;
+} 
 
 /* ----1.2. seccion main----- */
 .chat-message {
@@ -226,6 +308,15 @@ select {
   align-items: center;
   padding-inline: 1rem;
 }
+
+.chat-message > button {
+  background: #cb7bb7;
+  border: none;
+  color: #f8f3f3;
+  border-radius: 50%;
+  padding: .2em .4em;
+ }
+ 
 
 .chat-message ::placeholder {
   color: #CB7BB7;
@@ -237,19 +328,39 @@ select {
   height: 15px;
 }
 
-.chat-message input {
+.react-input-emoji--container {
+  border-radius: 21px;
+  border-color: #CB7BB7 !important;
+  font-size: 15px;
+  font-family: sans-serif;
+ } 
+
+.react-input-emoji--input {
   border-radius: 1rem;
   width: 90%;
   background: #433574;
   color: #CB7BB7;
   border: 1px solid #CB7BB7;
   font-weight: 500;
-  padding: .2rem 1rem;
+  padding: .2rem 1rem !important;
+}
+
+.react-input-emoji--container:active {
+  border-color: #c3c2c6 !important;
+}
+
+.react-input-emoji--button svg {
+  fill: #CB7BB7 !important;
+}
+
+.react-input-emoji--button {
+  position: relative;
+  display: flex !important;
 }
 
 .main {
   display: grid;
-  grid-template-rows: 10% 83% 7%;
+  grid-template-rows: 10% 82% 8%;
   /* max-height: 100%; */
  } 
 
@@ -278,15 +389,10 @@ select {
 
 .sender-name {
   text-align: right;
-  color: #CB7BB7;
-}
-
-.receptor-name {
-  color: #433574;
 }
 
 .msg-recipient {
-  background-color: #CB7BB7;
+  /* background-color: #CB7BB7; */
   max-width: 45%;
   padding: .5em;
   border-radius: .5em;
@@ -295,6 +401,14 @@ select {
 
 .sender-msg {margin-left: auto;}
 .receptor-msg {margin-right: auto;}
+.c-CB7BB7 {background-color: #CB7BB7;}
+.c-646FD0 {background-color: #646FD0;}
+.c-245CAC {background-color: #245CAC;}
+.c-549DCF {background-color: #549DCF;}
+.p-CB7BB7 {color: #CB7BB7;}
+.p-646FD0 {color: #646FD0;}
+.p-245CAC {color: #245CAC;}
+.p-549DCF {color: #549DCF;}
 
 /* ----1.3. users aside----- */
 .users-aside {
@@ -303,6 +417,8 @@ select {
   background: #F3F3F3;
   border-left: 1px solid #433574;
   padding: 0 .5rem;
+
+  overflow-y: scroll;
 }
 
 .users-title {
@@ -326,9 +442,112 @@ select {
 
 .user {
   background: #433574;
-  padding: .5rem;
+  padding: .6rem .5rem;
   border-radius: .5em;
+  display: grid;
+  grid-template-columns: 25% 5% 70%;
 } 
+
+.user img {
+  align-self: center;
+  border-radius: 40%;
+}
+
+.user-info {
+  flex-direction: column;
+  grid-column: 3;
+} 
+
+.user image {
+  border-radius: 50%;
+}
+
+/* ------- Modals -------- */
+.modal-shadow-bg {
+  margin-top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.modal {
+  position: fixed;
+  background: #f3f3f3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  z-index: 10;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.m-create-channel {
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal h3 {
+  color: #433574;
+}
+
+.m-join-to-channel h3 {margin-bottom: 2rem;}
+.m-choose-colors {
+  gap: 3rem;
+}
+.m-choose-colors div{
+  width: 70px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+ 
+.modal button { background: #433574; }
+
+.modal-btns {justify-content: space-between;}
+.modal-btns button {
+  width: 40%;
+}
+
+.welcome-modal-error {
+  position: absolute;
+  top: 3%;
+  right: 2%;
+  border: 1px solid;
+  border-radius: .5em;
+  padding: 1rem;
+  color: #D8000C;
+  background-color: #FFBABA;
+  background-image: url('https://i.imgur.com/GnyDvKN.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+.hide-modal { 
+  display: none;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}
+
+.close-x {
+  position: absolute;
+  right: 1rem;
+  top: .5rem;
+}
+
+.close-x i{
+  color: #433574;
+}
+
+.error {
+  margin-left: 2rem;
+}
 
 @media (max-width: 768px) {
   .halfPurple {

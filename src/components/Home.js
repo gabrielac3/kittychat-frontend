@@ -1,75 +1,107 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { ChatAside } from './ChatAside'
 import { ChatBody } from './ChatBody'
 import { ChatFooter } from './ChatFooter'
+import { ModalDeleteChannel } from './ModalDeleteChannel'
+import { ModalEditChannel } from './ModalEditChannel'
+import { ProfileAside } from './ProfileAside'
 
-export const Home = ({ socket }) => {
+export const Home = ({ socket, user }) => {
   const [messages, setMessages] = useState([])
-  useEffect(()=> {
-    socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
-  }, [socket, messages])
-/* -----------TESTING SOCKETS---------- */
+  const [avatarChange, setAvatarChange] = useState('')
+  const [channelInfo, setChannelInfo] = useState({
+    name_channel: 'Canal General',
+    description: 'Canal General'
+  });
+  const [color, setColor] = useState('#CB7BB7')
+  const userSession = JSON.parse(sessionStorage.getItem('userName'));
 
+  //modals
+  const [isOpen, setIsOpen] = useState({
+    joinChannel: false,
+    createChannel: false,
+    chooseAvatar: false,
+    channelOptions: false,
+    editChannel: false,
+    deleteChannel: false,
+    chooseColor: false
+  });
+
+  const toggleModal = (modals) => {
+    const toggles = modals.reduce((memo, value) => {
+      memo[value] = !memo[value];
+      return memo
+    }, { ...isOpen })
+    setIsOpen(toggles);
+  }
+  // const toggleModal = modal => {
+  //   setIsOpen({ ...isOpen, [modal]: !isOpen[modal] })
+  // }
+
+
+  useEffect(() => {
+    socket.on("chat message", msgInfo => setMessages([...messages, msgInfo]))
+    socket.on("general room", msgInfo => setMessages([...messages, msgInfo]))
+  }, [socket, messages])
+  useEffect(() => {
+    console.log('messages body', messages);
+  }, [messages])
+
+  const showHideModal = (modal) => {
+    toggleModal(modal);
+    toggleModal(['channelOptions']);
+  }
+
+  console.log(user, userSession.uid === channelInfo.uid)
+  console.log(user, userSession)
   return (
     <div className='home'>
-        <section className='profile-aside'>
-          <div className='profile-logo'>
-            <img src='../image/logo-home.png' alt='logo home'/>
+      <section className='profile-aside'>
+        <ProfileAside
+          setChannelInfo={setChannelInfo} socket={socket} user={user}
+          setAvatarChange={setAvatarChange} avatarChange={avatarChange}
+          toggleModal={toggleModal} isOpen={isOpen}
+          channelInfo={channelInfo} setColor={setColor}
+        />
+      </section>
+
+      <section className='main'>
+        <div className='chat-navbar'>
+          <div>
+            <h3>{channelInfo ? channelInfo.name_channel : 'general Channel'}</h3>
+            <p>{channelInfo ? channelInfo.description : 'Grupo para desarrollar...'}</p>
           </div>
-          <div className='profile'>
+          {userSession.uid === channelInfo.uid &&
             <div>
-              <img src='../image/user-img.png' alt='profile-img'/>
-            </div>
-            <p>Daphnne Reyes</p>
-          </div>
-          <button>Crear canal</button>
-          <div className='channels-info'>
-            <div className='channels-title'>
-              <i className="fa-solid fa-cat"></i>
-              <h2>Channels</h2>
-            </div>
-            <ul className='channels'>
-              <li>Fans de JC</li>
-              <li>ChatApp</li>
-            </ul>
-          </div>
-        </section>
+              <i className="fa-solid fa-ellipsis-vertical" onClick={() => toggleModal(['channelOptions'])}></i>
+              {isOpen.channelOptions && <div>
+                <p onClick={() => toggleModal(['editChannel'])}>Editar</p>
+                {isOpen.editChannel &&
+                  <ModalEditChannel
+                    toggleModal={toggleModal}
+                    setChannelInfo={setChannelInfo}
+                    channelInfo={channelInfo}
+                  />}
 
-        <section className='main'>
-          <div className='chat-navbar'>
-            <div>
-              <h3>ChatApp</h3>
-              <p>Grupo para desarrollar...</p>
-            </div>
-            <div>
-              <i className="fa-solid fa-ellipsis-vertical"></i>
-            </div>
-          </div>
+                <p onClick={() => toggleModal(['deleteChannel'])}>Eliminar</p>
+                {isOpen.deleteChannel &&
+                  <ModalDeleteChannel
+                    toggleModal={toggleModal}
+                    setChannelInfo={setChannelInfo}
+                    channelInfo={channelInfo}
+                  />}
+              </div>}
+            </div>}
+        </div>
 
-          <ChatBody messages={messages} />
+        <ChatBody messages={messages} channelInfo={channelInfo} color={color} />
 
-          <ChatFooter socket={socket} />
-        </section>
+        <ChatFooter socket={socket} channelInfo={channelInfo} />
+      </section>
 
-        <section className='users-aside'>
-          <div className='users-title'>
-            <i className="fa-solid fa-users"></i>
-            <h3>Users</h3>
-          </div>
-          <div className='users-cards'>
-            <div className='user'>
-              <h4>Paola Gamarra</h4>
-              <p>Online</p>
-            </div>
-            <div className='user'>
-              <h4>Gaby Córdova</h4>
-              <p>Online</p>
-            </div>
-            <div className='user'>
-              <h4>Daniela fuentes</h4>
-              <p>Online</p>
-            </div>
-          </div>
-        </section>
+      <section className='users-aside'>
+        <ChatAside socket={socket} avatarChange={avatarChange} />
+      </section>
     </div>
   )
 }
