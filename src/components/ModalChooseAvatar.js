@@ -39,7 +39,6 @@ export const ModalChooseAvatar = ({
   toggleModal, userSession, setAvatar, setAvatarChange
 }) => {
   async function changeAvatar(avatar) {
-    console.log(avatar, 'avat')
     try {
       const response = await axios.post('https://chatappservice.onrender.com/updateUserImg', {
         email: userSession.email,

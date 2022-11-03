@@ -8,7 +8,6 @@ export const Welcome = ({ socket, setUser }) => {
   if (errorMsg) {
     setTimeout(() => {
       document.querySelector('.welcome-modal-error').classList.add('hide-modal')
-      console.log('hide');
     }, 3000);
   }
   return (

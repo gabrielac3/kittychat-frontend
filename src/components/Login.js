@@ -60,7 +60,6 @@ export const Login = (props) => {
     if(!res.message.includes(' ')){
       // get userRow
       const userRow = await getUserRow()
-      console.log('login', userRow);
       // get Token
       const token = res.message;
       props.setUser(userRow.message.user_name);
@@ -86,7 +85,6 @@ export const Login = (props) => {
   }
 
   const showError = (res) => {
-    console.log(JSON.stringify(res,null,2))
     const resMsg = res.message
     props.onErrorMsg(resMsg)
   }

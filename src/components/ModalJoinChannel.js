@@ -13,7 +13,6 @@ export const ModalJoinChannel = ({
     } catch (error) {
       console.error(error.message);
     }
-    console.log('both: current, next', currentChannel, channelInfo);
     socket.emit("joinChannel", {
       channelInfo,
       userSession,

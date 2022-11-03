@@ -7,7 +7,6 @@ import { ModalChooseAvatar } from './ModalChooseAvatar';
 import { ModalChooseColor } from './ModalChooseColor';
 
 export const ProfileAside = (props) => {
-  console.log(props.user)
   const navigate = useNavigate();
   const [joinChannelData, setJoinChannelData] = useState(false);
 
@@ -35,7 +34,6 @@ export const ProfileAside = (props) => {
           const response = await axios.post('https://chatappservice.onrender.com/channelByName', {
             channelName: channel.name_channel
           });
-          console.log(response.data.message);
           props.setChannelInfo(response.data.message);
         } catch (error) {
           console.error(error.message);
@@ -48,7 +46,6 @@ export const ProfileAside = (props) => {
 
   const logOut = () => {
     props.socket.emit('logOut');
-    console.log('cerrar sesión');
     navigate('/login');
     sessionStorage.clear();
   }

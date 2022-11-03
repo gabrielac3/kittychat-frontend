@@ -5,7 +5,6 @@ export const ModalDeleteChannel = (props) => {
 
     async function deleteChannel(e) {
 /*         e.preventDefault(); */
-        console.log(props.channelInfo)
         try {
             const response = await axios.post('https://chatappservice.onrender.com/deleteChannel', {
             cid: props.channelInfo.cid,

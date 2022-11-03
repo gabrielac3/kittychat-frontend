@@ -8,7 +8,6 @@ export const ChatFooter = ({ socket, channelInfo }) => {
   const handleSendMessage = async () => {
     // e.preventDefault();
     const user = JSON.parse(sessionStorage.getItem('userName'))
-    console.log(channelInfo.name_channel);
     if(message.trim() && sessionStorage.getItem('userName')) {
       if(channelInfo.name_channel==='Canal General'){
         socket.emit('general room', {

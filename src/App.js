@@ -14,7 +14,6 @@ function App() {
 
   socket.on('connect', () => {
     let userData = JSON.parse(sessionStorage.getItem('userName'));
-    console.log('me connecto ahora')
     if (userData !== null){
       setUser(userData);
       socket.emit("reconnect", {
@@ -29,12 +28,10 @@ function App() {
   if(errorMsg) {
     setTimeout(() => {
       errorModal.current.classList.add('hide-modal')
-      console.log('hide');
     }, 3000);
   }
 
   useEffect(()=>{
-    console.log(user)
   }, [user])
 
   return (

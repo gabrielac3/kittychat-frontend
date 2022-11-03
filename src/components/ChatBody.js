@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const ChatBody = ({ messages, channelInfo, color }) => {
-  console.log('color', color)
   const userName = JSON.parse(sessionStorage.getItem('userName'));
 
   return (
