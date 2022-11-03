@@ -3,7 +3,7 @@ import React from 'react'
 export const ModalCreateChannel = ({ toggleModal, setNewChannel }) => {
   const user = JSON.parse(sessionStorage.getItem('userName'))
   const addChannel = () => {
-    return fetch('http://localhost:3100/addChannel', {
+    return fetch('https://chatappservice.onrender.com/addChannel', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

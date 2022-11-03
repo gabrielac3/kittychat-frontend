@@ -6,7 +6,7 @@ export const ModalEditChannel = (props) => {
 
     const getChannelInfo = async(channel) => {
         try {
-          const response = await axios.post('http://localhost:3100/channelByName', {
+          const response = await axios.post('https://chatappservice.onrender.com/channelByName', {
             channelName: channel.name_channel
           });
           return response.data.message;
@@ -20,7 +20,7 @@ export const ModalEditChannel = (props) => {
         e.preventDefault();
         const dataChannel = await getChannelInfo(props.channelInfo);
         try {
-            const response = await axios.post('http://localhost:3100/updateChannel', {
+            const response = await axios.post('https://chatappservice.onrender.com/updateChannel', {
             cid: dataChannel.cid,
             newNameChannel: formData.nameChannel,
             newDescription: formData.description,

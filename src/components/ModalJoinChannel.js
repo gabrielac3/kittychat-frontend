@@ -6,7 +6,7 @@ export const ModalJoinChannel = ({
 }) => {
   async function sendChannelName(channelInfo, userSession){
     try {
-      await axios.post('http://localhost:3100/addUserToChannel', {
+      await axios.post('https://chatappservice.onrender.com/addUserToChannel', {
         cid: channelInfo.cid,
         uid: userSession.uid
       });

@@ -14,7 +14,7 @@ export const ChatAside = ({socket, avatarChange}) => {
 
   const fetchDataUser = async () => {
     try {
-      const response = await axios.get('http://localhost:3100/users');
+      const response = await axios.get('https://chatappservice.onrender.com/users');
       setUsers(response.data);
     } catch (error) {
       console.error(error.message);

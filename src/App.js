@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
 
-const socket = io("http://localhost:3300/");
+const socket = io("https://chatappservice.onrender.com/");
 
 function App() {
   

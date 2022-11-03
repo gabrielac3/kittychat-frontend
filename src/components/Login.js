@@ -5,7 +5,7 @@ export const Login = (props) => {
   const navigate = useNavigate();
 
   const getToken = () => {
-    return fetch('http://localhost:3100/login', {
+    return fetch('https://chatappservice.onrender.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ export const Login = (props) => {
   }
 
   const getUserRow = () => {
-    return fetch('http://localhost:3100/userRow',{
+    return fetch('https://chatappservice.onrender.com/userRow',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -73,17 +73,20 @@ export const Login = (props) => {
         'color': userRow.message.color
       }));
 
+      props.socket.connect();
+
       props.socket.emit("newUser", {
         email: formData.email, 
         socketID: props.socket.id
       });
       setFormData({email: "", password: ""});
       navigate('/home'); 
-    }
-    showError(res)
+    }else{
+    showError(res)}
   }
 
   const showError = (res) => {
+    console.log(JSON.stringify(res,null,2))
     const resMsg = res.message
     props.onErrorMsg(resMsg)
   }
