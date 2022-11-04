@@ -47,6 +47,10 @@ export const ModalChooseAvatar = ({
       // setAvatar(avatar.src)
       setAvatarChange(avatar.src)
       toggleModal(['chooseAvatar'])
+      let loggedInUser = JSON.parse(localStorage.getItem('userName'));
+      loggedInUser.image = avatar.src;
+      localStorage.setItem('userName', JSON.stringify(loggedInUser));
+
     } catch (error) {
       console.error(error.message);
     }

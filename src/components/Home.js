@@ -74,8 +74,12 @@ export const Home = ({ socket, user }) => {
           {userSession.uid === channelInfo.uid &&
             <div>
               <i className="fa-solid fa-ellipsis-vertical" onClick={() => toggleModal(['channelOptions'])}></i>
-              {isOpen.channelOptions && <div>
+              {isOpen.channelOptions && <div >
+              <div className= "modalChannelOptions">
                 <p onClick={() => toggleModal(['editChannel'])}>Editar</p>
+                <p onClick={() => toggleModal(['deleteChannel'])}>Eliminar</p>
+              </div>
+                
                 {isOpen.editChannel &&
                   <ModalEditChannel
                     toggleModal={toggleModal}
@@ -83,7 +87,6 @@ export const Home = ({ socket, user }) => {
                     channelInfo={channelInfo}
                   />}
 
-                <p onClick={() => toggleModal(['deleteChannel'])}>Eliminar</p>
                 {isOpen.deleteChannel &&
                   <ModalDeleteChannel
                     toggleModal={toggleModal}

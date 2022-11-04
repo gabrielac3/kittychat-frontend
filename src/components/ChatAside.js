@@ -57,7 +57,7 @@ export const ChatAside = ({socket, avatarChange}) => {
         users1[users1.current].map((user) =>
         <div className='user' key={user.uid}> 
           <img src={user.image} alt='userImage'/> 
-          <p>{user.user_name}</p>
+          <p className="user-info">{user.user_name}</p>
         </div>
       )}
     </div>
