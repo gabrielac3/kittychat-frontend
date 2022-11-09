@@ -73,6 +73,7 @@ select {
 }
 
 .flex { display: flex; }
+
 .cursor-btn { cursor: pointer; }
 
 .welcome-main {
@@ -207,11 +208,12 @@ select {
   flex-direction: column;
   padding: 1.5rem;
   border-right: 1px solid #f3f3f3;
+  justify-content: space-between;
 }
 
 .bg-circular {
   background: #cb7bb7;
-  padding: .1em .3em;
+  padding: 0.1em 0.2em;
   border-radius: 50%;
   position: relative;
 }
@@ -228,6 +230,11 @@ select {
   border-radius: .5em;
   font-weight: 500;
   font-size: 1.1rem;
+  margin-top: 0px;
+}
+
+.profile-aside div{
+  margin-top: 0px;
 }
 
 .profile-aside > * + * {
@@ -339,10 +346,12 @@ select {
   border-radius: 1rem;
   width: 90%;
   background: #433574;
-  color: #CB7BB7;
+  color: white;
   border: 1px solid #CB7BB7;
   font-weight: 500;
   padding: .2rem 1rem !important;
+  font-family: "Roboto";
+  font-size: 18px;
 }
 
 .react-input-emoji--container:active {
